@@ -1,0 +1,151 @@
+body {
+    background-image: url('./bg-login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+  }
+  
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatContainer {
+    display: flex;
+    width: 90lvw;
+    height: 90lvh;
+    margin: 5lvh 5lvw;
+    background-color: transparent;
+}
+
+.contactSection {
+    width: 33%;
+    background-color: #ebedeb;
+}
+
+.contactHeader {
+    height: 10%;
+    background-color: #e8e9eb;
+    border-right: 1px solid #c5c5c5;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.filterSection {
+    background-color: #e8e9eb;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter {
+    width: 90%;
+    padding: 5px;
+}
+
+.contactContainer {
+    height: 80%;
+    overflow: auto;
+}
+
+.contact {
+    height: 20%;
+    background-color: transparent;
+    color: #242424;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+.photo {
+    width: 60px;
+    height: 60px;
+    background-color: #242424;
+    border-radius: 100%;
+    margin: 0 15px 0 0;
+}
+
+.contactData {
+    display: inherit;
+    flex-direction: column;
+    width: 80%;
+}
+
+.contactData p {
+    margin: 5px 0 5px 0;
+}
+
+.messageHour p {
+    font-size: 15px;
+}
+
+.messageHour {
+    display: inherit;
+    justify-content: space-between;
+}
+
+.messageSection {
+    width: 67%;
+    background-color: #e6dfd9;
+}
+
+.messageHeader {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    background-color: #e8e9eb;
+    align-items: center;
+    text-align: start;
+    color: #242424;
+}
+
+.photoMiniature {
+    width: 50px;
+    height: 50px;
+    background-color: #242424;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.nameHeader, .statusHeader {
+    margin: 2px 0 0 0;
+}
+
+.statusHeader {
+    font-size: 15px;
+}
+
+.messageContainer {
+    height: 80%;
+}
+
+.inputDiv {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    background-color: #e8e9eb;
+}
+
+.messageInput {
+    width: 90%;
+    display: inherit;
+    margin-left: 20px;
+}
+
+.sendBtn {
+    height: 30px;
+    margin: auto;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+    border: 1px solid #242424;
+    background-color: white;
+}
