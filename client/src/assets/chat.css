@@ -101,7 +101,7 @@ body {
     background-color: #e8e9eb;
     align-items: center;
     text-align: start;
-    color: #242424;
+    color: #1D4355;
 }
 
 .photoMiniature {
@@ -148,4 +148,78 @@ body {
     margin-left: 10px;
     border: 1px solid #242424;
     background-color: white;
+}
+
+@media only screen and (max-width: 800px) {
+    
+.contactSection {
+    width: 20%;
+    background-color: #ebedeb;
+}
+
+.contactHeader {
+    height: 10%;
+    background-color: #e8e9eb;
+    border-right: 1px solid #c5c5c5;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.filterSection {
+    display: none;
+}
+
+.filter {
+    width: 90%;
+    padding: 5px;
+}
+
+.contactContainer {
+    height: 90%;
+    overflow: auto;
+}
+
+.contact {
+    height: 20%;
+    background-color: transparent;
+    color: #242424;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo {
+    width: 70%;
+    height: 70%;
+    background-color: #242424;
+    border-radius: 100%;
+    margin: 0 0 0 0;
+}
+
+.contactData {
+    display: none;
+    flex-direction: column;
+    width: 80%;
+}
+
+.contactData p {
+    margin: 5px 0 5px 0;
+}
+
+.messageHour p {
+    font-size: 15px;
+}
+
+.messageHour {
+    display: inherit;
+    justify-content: space-between;
+}
+
+.messageSection {
+    width: 80%;
+}
 }
