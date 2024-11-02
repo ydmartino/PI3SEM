@@ -5,14 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.Objects;
 
-@Entity
+@Entity(name = "Contacts")
 public class Contacts {
 
     @Id //Identifies in DB a primareKey 
     @GeneratedValue( strategy = GenerationType.IDENTITY)//delegate to DB the responsability to increment ID number
-    private String id;
+    private int id;
 
     @Column(nullable = false)
     private String password;
@@ -23,11 +22,11 @@ public class Contacts {
     @Column(nullable = false)
     private boolean isAdmin;
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,14 +59,27 @@ public class Contacts {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        Contacts other = (Contacts) obj;
-        if (id==null) {
-            if (other.id != null) return false;
-        } else if(!id.equals(other.id)) return false;
-        return false;
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Contacts other = (Contacts) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    
+
 }
