@@ -5,19 +5,19 @@ function SignUpForm({ logging }) {
 
     return (
         <div className='signupContainer' style={{display: logging ? 'none' : ''}}>
-                    <form className="loginForm">
+                <form className="loginForm">
                         
-                        <label htmlFor="">Usuário:</label>
-                            <input type="text" />
+                    <label htmlFor="">Usuário:</label>
+                        <input type="text" />
 
-                        <label htmlFor="">Senha:</label>
-                            <input type="password" />
+                    <label htmlFor="">Senha:</label>
+                        <input type="password" />
 
-                        <label htmlFor="">Confirme sua senha:</label>
-                            <input type="password" />
-                    </form>
-                    <button type='submit' className='loginBtn'>Entrar</button>
-                </div>
+                    <label htmlFor="">Confirme sua senha:</label>
+                        <input type="password" />
+                </form>
+            <button type='submit' className='loginBtn'>Cadastrar</button>
+        </div>
     )
 }
 

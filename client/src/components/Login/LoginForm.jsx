@@ -5,11 +5,11 @@ function LoginForm({ logging }) {
         <div className='formContainer' style={{display: !logging ? 'none' : ''}}>
                     <form className="loginForm">
                         
-                        <label htmlFor="">Usuário:</label>
-                            <input type="text" />
+                        <label htmlFor="username">Usuário:</label>
+                            <input type="text" name="username"/>
 
-                        <label htmlFor="">Senha:</label>
-                            <input type="password" />
+                        <label htmlFor="password">Senha:</label>
+                            <input type="password" name="password"/>
 
                         <div className="rememberMe">
                             <label className='rememberMeTxt'>Lembrar-me:</label>
