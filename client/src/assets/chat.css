@@ -21,59 +21,136 @@ body {
 
 .contactSection {
     width: 33%;
-    background-color: #ebedeb;
+    border-right: 1px solid #c5c5c5;
+    background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
+}
+
+.contactSection.dark {
+    background-image: linear-gradient(to bottom, #242424, #3a3d4b, #475976, #467aa4, #2a9dd0);
 }
 
 .contactHeader {
     height: 10%;
-    background-color: #e8e9eb;
     border-right: 1px solid #c5c5c5;
-    border-bottom: 1px solid #c5c5c5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #242424;
+    padding: 10px;
+}
+
+.contactHeader p {
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.searchIcon {
+    width: 40px;
+    height: 70%;
+    background-image: url('./search-light.svg');
+    background-size: cover;
+    cursor: pointer;
+    transition: .4s;
+    border-radius: 10px;
+}
+
+.searchIcon:hover {
+    background-color: #cccccc;
 }
 
 .filterSection {
-    background-color: #e8e9eb;
-    height: 10%;
+    height: 0%;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .4s ease;
+}
+
+.filterSection.show {
+    height: 5%;
+    transition: .4s ease;
 }
 
 .filter {
     width: 90%;
-    padding: 5px;
+    display: none;
+    transition: .4s ease;
+}
+
+.filter.show {
+    display: block;
 }
 
 .contactContainer {
-    height: 80%;
+    height: 90%;
     overflow: auto;
+    transition: .4s ease;
+}
+
+.contactContainer.reduce {
+    height: 85%;
+    transition: .4s ease;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .contact {
-    height: 20%;
+    height: 15%;
     background-color: transparent;
     color: #242424;
-    margin: 5px;
     display: flex;
     flex-direction: row;
     text-align: start;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 34px;
+    margin: 15px;
     align-items: center;
 }
 
+.contact:hover > .photo {
+    width: 0;
+    height: 0;
+    margin: 0;
+    border: none;
+}
+
+.contact:hover > .contactData { 
+    width: 100%;
+ }
+
 .photo {
-    width: 60px;
-    height: 60px;
-    background-color: #242424;
+    width: 100px;
+    height: 100px;
+    background-color: #efefef;
     border-radius: 100%;
     margin: 0 15px 0 0;
+    border: 1px solid #242424;
+    transition: .4s ease;
 }
 
 .contactData {
-    display: inherit;
+    display: flex;
     flex-direction: column;
     width: 80%;
+    border-radius: 40px;
+    background-color: #efefef;
+    padding: 20px;
+    transition: .4s ease;
+    cursor: pointer;
 }
 
 .contactData p {
@@ -91,26 +168,27 @@ body {
 
 .messageSection {
     width: 67%;
-    background-color: #e6dfd9;
+    background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
 }
 
 .messageHeader {
     display: flex;
     flex-direction: row;
     height: 10%;
-    background-color: #e8e9eb;
     align-items: center;
     text-align: start;
     color: #1D4355;
+    border-bottom: 1px solid #c5c5c5;
 }
 
 .photoMiniature {
     width: 50px;
     height: 50px;
-    background-color: #242424;
+    background-color: #ffffff;
     border-radius: 100%;
     margin-left: 10px;
     margin-right: 10px;
+    border: 1px solid #242424;
 }
 
 .nameHeader, .statusHeader {
@@ -130,14 +208,15 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
-    background-color: #e8e9eb;
+    align-items: center;
+    background-color: #efefef;
 }
 
 .messageInput {
     width: 90%;
     display: inherit;
     margin-left: 20px;
+    margin-top: 10px;
 }
 
 .sendBtn {
@@ -152,74 +231,4 @@ body {
 
 @media only screen and (max-width: 800px) {
     
-.contactSection {
-    width: 20%;
-    background-color: #ebedeb;
-}
-
-.contactHeader {
-    height: 10%;
-    background-color: #e8e9eb;
-    border-right: 1px solid #c5c5c5;
-    border-bottom: 1px solid #c5c5c5;
-}
-
-.filterSection {
-    display: none;
-}
-
-.filter {
-    width: 90%;
-    padding: 5px;
-}
-
-.contactContainer {
-    height: 90%;
-    overflow: auto;
-}
-
-.contact {
-    height: 20%;
-    background-color: transparent;
-    color: #242424;
-    margin: 5px;
-    display: flex;
-    flex-direction: row;
-    text-align: start;
-    border-radius: 10px;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-}
-
-.photo {
-    width: 70%;
-    height: 70%;
-    background-color: #242424;
-    border-radius: 100%;
-    margin: 0 0 0 0;
-}
-
-.contactData {
-    display: none;
-    flex-direction: column;
-    width: 80%;
-}
-
-.contactData p {
-    margin: 5px 0 5px 0;
-}
-
-.messageHour p {
-    font-size: 15px;
-}
-
-.messageHour {
-    display: inherit;
-    justify-content: space-between;
-}
-
-.messageSection {
-    width: 80%;
-}
 }

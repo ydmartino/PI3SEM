@@ -91,7 +91,7 @@ h1 {
     transition: .4s;
 }
 
-.slider:before {
+.slider::before {
     position: absolute;
     content: "";
     height: 23px;
@@ -120,7 +120,7 @@ input:checked + .slider:before {
 .slider.round {
     border-radius: 34px;
 }
-.slider.round:before {
+.slider.round::before {
     border-radius: 50%;
 }
 
