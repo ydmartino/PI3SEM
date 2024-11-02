@@ -3,7 +3,8 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
-}
+  }
+  
 
 *{
     box-sizing: border-box;
@@ -24,7 +25,23 @@ h1 {
     width: 60lvw;
     height: 100lvh;
     margin: 0px;
+    background-image: url('./bg_lightmode.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: .3s ease;
+    display: flex;
+}
+
+.modeBtn {
+    background-image: url('./moon.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: transparent;
+    border: transparent;
+    width: 40px;
+    height: 40px;
+    transition: .3 ease;
+    margin: 5px;
 }
 
 .loginContainer {
@@ -36,6 +53,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: .3s ease;
 }
 
 .loginHeader {
@@ -68,7 +86,7 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #40BDB7;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -76,13 +94,21 @@ h1 {
 .slider:before {
     position: absolute;
     content: "";
-    height: 22px;
+    height: 23px;
     width: 22px;
     left: 4px;
     bottom: 4px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #1D4355;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #1D4355;
 }
 
 input:checked + .slider:before {
@@ -146,10 +172,42 @@ label {
     height: 40px;
     border-radius: 10px;
     border: none;
-    background-color: #A3C7CD;
+    background-color: #289DD2;
     transition: .4s;
 }
 
 .loginBtn:hover {
-    background-color: #819ba0;
+    background-color: #1D4355;
+    color: #F2F1EC;
+}
+
+.dark.transpArea {
+    background-image: url('./bg_darkmode.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dark.loginContainer {
+    background-color: #36596A;
+    color: #F2F1EC;
+}
+
+.dark.loginBtn {
+    margin: 10%;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1D4355;
+    transition: .4s;
+    color: #F2F1EC;
+}
+
+
+.dark.loginBtn:hover {
+    background-color: #192c35;
+}
+
+.dark.modeBtn {
+    background-image: url('./sun.svg');
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import './App.css'
 import Login from './routes/Login'
+import Chat from './routes/Chat'
+import './App.css'
 
 function App() {
 

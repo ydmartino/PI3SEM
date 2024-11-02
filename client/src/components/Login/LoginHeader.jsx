@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LoginHeader({ toggleForm }) {
+function LoginHeader({ toggleForm, toggleDark }) {
 
     return (
         <div className="loginHeader">
