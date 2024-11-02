@@ -13,13 +13,15 @@ public class Contacts {
     @Id //Identifies in DB a primareKey 
     @GeneratedValue( strategy = GenerationType.IDENTITY)//delegate to DB the responsability to increment ID number
     private String id;
+
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)    
+
+    @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private boolean isAdmin;
-
 
     public String getId() {
         return this.id;
@@ -57,5 +59,15 @@ public class Contacts {
         this.isAdmin = isAdmin;
     }
 
-    
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Contacts other = (Contacts) obj;
+        if (id==null) {
+            if (other.id != null) return false;
+        } else if(!id.equals(other.id)) return false;
+        return false;
+    }
 }
