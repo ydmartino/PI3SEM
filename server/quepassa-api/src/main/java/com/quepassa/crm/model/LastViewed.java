@@ -1,6 +1,6 @@
 package com.quepassa.crm.model;
 
-public class LastViewd {
+public class LastViewed {
     
     private String fromIdUser;
     private String toIdUser;
