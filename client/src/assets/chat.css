@@ -3,6 +3,10 @@ body {
     font-family: "Comic Sans MS", "Comic Sans", cursive;  
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .page {
     display: flex;
     justify-content: center;
@@ -63,8 +67,8 @@ body {
 }
 
 .searchIcon {
-    width: 50%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
     background-image: url('./search-light.svg');
     background-size: cover;
     cursor: pointer;
@@ -80,8 +84,12 @@ body {
     background-image: url('./search-dark.svg');
 }
 
+.openCloseBtn {
+    display: none;
+}
+
 .filterSection {
-    height: 0%;
+    height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,8 +168,8 @@ body {
  }
 
 .photo {
-    width: 30%;
-    height: 90%;
+    width: 25%;
+    height: 70%;
     background-color: #efefef;
     border-radius: 100%;
     margin: 0 15px 0 0;
@@ -281,6 +289,86 @@ body {
     border: none;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 720px) {
+    .contactSection {
+        width: 10%;
+        transition: .2s ease;
+    }
+
+    .contactSection.open {
+        width: 100%;
+    }
+
+    .photo {
+        width: 20%;
+        height: 70%;
+    }
+
+    .contact {
+        margin: 5px 10px;
+    }
+
+    .btns, .filterSection, .contactContainer, .contactHeader p {
+        display: none;
+    }
     
+    .openCloseBtn {
+        display: flex;
+        background: url('./open-right-light.svg') no-repeat center center;
+        background-size: cover;
+        width: 50px;
+        height: 20px;
+        cursor: pointer;
+        transition: .4s ease;
+    }
+
+    .openCloseBtn.dark {
+        display: flex;
+        background: url('./open-right-dark.svg') no-repeat center center;
+        background-size: cover;
+        width: 50px;
+        height: 20px;
+        cursor: pointer;
+        transition: .4s ease;
+    }
+
+    .openCloseBtn.clicked {
+        display: flex;
+        background: url('./close-left-light.svg') no-repeat center center;
+        background-size: cover;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .openCloseBtn.clicked.dark {
+        display: flex;
+        background: url('./close-left-dark.svg') no-repeat center center;
+        background-size: cover;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .btns.show, .filterSection.show, .contactHeader.show p {
+        display: flex;
+    }
+
+    .contactContainer.show {
+        display: block;
+        height: 85%;
+    }
+
+    .messageSection {
+        width: 90%;
+        transition: .4s ease;
+    }
+
+    .messageSection.reduce {
+        width: 0%;
+    }
+
+    .messageSection.reduce > * {
+        display: none; 
+    }
 }

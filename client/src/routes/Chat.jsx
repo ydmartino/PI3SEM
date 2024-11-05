@@ -6,7 +6,7 @@ function Chat() {
     const contacts = [{
         'nome' : 'Marcelo',
         'mensagem' : 'Bom dia',
-        'hora' : '09:52'
+        'hora' : '09:52',
     },
     {
         'nome' : 'Diego',
@@ -44,6 +44,7 @@ const [ nomeChat, setNomeChat ] = useState('')
 const [ filterShow, setfilterShow ] = useState(false)
 const [ search, setSearch ] = useState('')
 const [ mode, setMode ] = useState(false)
+const [ leftBar, setLeftBar ] = useState(false)
 
 const handleFilter = () => {
     const filterArea = document.getElementsByClassName('filterSection')[0]
@@ -66,7 +67,7 @@ const handleFilter = () => {
 function toggleMode () {
     const contactData = document.getElementsByClassName('contactData')
     const elements = ['page', 'modeBtn', 'contactSection', 'contactHeader', 'filter', 
-        'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 'messageInput']
+        'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 'messageInput', 'openCloseBtn']
 
     if(!mode) {
         for (let index = 0; index < elements.length; index++) {
@@ -91,6 +92,39 @@ function toggleMode () {
     }
 }
 
+function toggleLeftBar () {
+    const contactSection = document.getElementsByClassName('contactSection')[0]
+    const messageSection = document.getElementsByClassName('messageSection')[0]
+    const openCloseBtn = document.getElementsByClassName('openCloseBtn')[0]
+    const contactHeader = document.getElementsByClassName('contactHeader')[0]
+    const elements = ['btns', 'filterSection', 'contactContainer']
+
+    if(!leftBar) {
+        contactSection.classList.add('open')
+        messageSection.classList.add('reduce')
+        openCloseBtn.classList.add('clicked')
+        contactHeader.classList.add('show')
+        for (let index = 0; index < elements.length; index++) {
+            const element = document.getElementsByClassName(elements[index])[0]
+            element.classList.add('show')
+        }
+        setLeftBar(!leftBar)
+    }
+    else {
+        contactSection.classList.remove('open')
+        messageSection.classList.remove('reduce')
+        openCloseBtn.classList.remove('clicked')
+        contactHeader.classList.remove('show')
+        contactHeader.classList.remove('show')
+        for (let index = 0; index < elements.length; index++) {
+            const element = document.getElementsByClassName(elements[index])[0]
+            element.classList.remove('show')
+        }
+        setLeftBar(!leftBar)
+    }
+
+}
+
     return (
         <>
             <div className="page">
@@ -102,6 +136,7 @@ function toggleMode () {
                                 <div className="modeBtn" onClick={toggleMode}></div>
                                 <div className="searchIcon" onClick={handleFilter}></div>
                             </div>
+                            <div className="openCloseBtn" onClick={toggleLeftBar}></div>
                         </div>
                         <div className="filterSection">
                             <input type="text" className='filter' placeholder='Pesquisar...' onChange={(e) => setSearch(e.target.value)}/>
