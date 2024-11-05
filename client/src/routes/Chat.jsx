@@ -43,6 +43,7 @@ function Chat() {
 const [ nomeChat, setNomeChat ] = useState('')
 const [ filterShow, setfilterShow ] = useState(false)
 const [ search, setSearch ] = useState('')
+const [ mode, setMode ] = useState(false)
 
 const handleFilter = () => {
     const filterArea = document.getElementsByClassName('filterSection')[0]
@@ -62,6 +63,34 @@ const handleFilter = () => {
     }
 }
 
+function toggleMode () {
+    const contactData = document.getElementsByClassName('contactData')
+    const elements = ['page', 'modeBtn', 'contactSection', 'contactHeader', 'filter', 
+        'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 'messageInput']
+
+    if(!mode) {
+        for (let index = 0; index < elements.length; index++) {
+            const element = document.getElementsByClassName(elements[index])[0]
+            element.classList.add('dark')
+        }
+        for (let index = 0; index < contactData.length; index++) {
+            contactData[index].classList.add('dark')
+        }
+        setMode(!mode)
+    } 
+    
+    else {
+        for (let index = 0; index < elements.length; index++) {
+            const element = document.getElementsByClassName(elements[index])[0]
+            element.classList.remove('dark')
+        }
+        for (let index = 0; index < contactData.length; index++) {
+            contactData[index].classList.remove('dark')
+        }
+        setMode(!mode)
+    }
+}
+
     return (
         <>
             <div className="page">
@@ -69,7 +98,10 @@ const handleFilter = () => {
                     <div className="contactSection">
                         <div className="contactHeader">
                             <p>Conversas</p>
-                            <div className="searchIcon"  onClick={handleFilter}></div>
+                            <div className="btns">
+                                <div className="modeBtn" onClick={toggleMode}></div>
+                                <div className="searchIcon" onClick={handleFilter}></div>
+                            </div>
                         </div>
                         <div className="filterSection">
                             <input type="text" className='filter' placeholder='Pesquisar...' onChange={(e) => setSearch(e.target.value)}/>
@@ -98,7 +130,7 @@ const handleFilter = () => {
                         </div>
                         <div className="inputDiv">
                             <input type="text" className="messageInput" placeholder='Digite sua mensagem...' />
-                            <button type='submit' className='sendBtn'>Enviar</button>
+                            <button type='submit' className='sendBtn'></button>
                         </div>
                     </div>
                 </div>

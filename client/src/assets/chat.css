@@ -1,14 +1,17 @@
 body {
-    background-image: url('./bg-login.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
     margin: 0;
-  }
-  
+    font-family: "Comic Sans MS", "Comic Sans", cursive;  
+}
+
 .page {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #A8E6CF;
+}
+
+.page.dark {
+    background-color: #50707F;
 }
 
 .chatContainer {
@@ -17,6 +20,9 @@ body {
     height: 90lvh;
     margin: 5lvh 5lvw;
     background-color: transparent;
+    -webkit-box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
 }
 
 .contactSection {
@@ -25,13 +31,12 @@ body {
     background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
 }
 
-.contactSection.dark {
+.contactSection.dark, .messageSection.dark {
     background-image: linear-gradient(to bottom, #242424, #3a3d4b, #475976, #467aa4, #2a9dd0);
 }
 
 .contactHeader {
     height: 10%;
-    border-right: 1px solid #c5c5c5;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,18 +50,34 @@ body {
     margin-left: 10px;
 }
 
+.contactHeader.dark, .messageHeader.dark {
+    color: #efefef
+}
+
+.btns {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .searchIcon {
-    width: 40px;
-    height: 70%;
+    width: 50%;
+    height: 100%;
     background-image: url('./search-light.svg');
     background-size: cover;
     cursor: pointer;
-    transition: .4s;
+    transition: .4s ease;
     border-radius: 10px;
 }
 
 .searchIcon:hover {
     background-color: #cccccc;
+}
+
+.searchIcon.dark {
+    background-image: url('./search-dark.svg');
 }
 
 .filterSection {
@@ -74,12 +95,18 @@ body {
 
 .filter {
     width: 90%;
+    height: 0;
     display: none;
     transition: .4s ease;
 }
 
 .filter.show {
+    height: 100%;
     display: block;
+}
+
+.filter.dark {
+    background-color: transparent;
 }
 
 .contactContainer {
@@ -110,14 +137,14 @@ body {
 }
 
 .contact {
-    height: 15%;
+    height: 20%;
     background-color: transparent;
     color: #242424;
     display: flex;
     flex-direction: row;
     text-align: start;
     border-radius: 34px;
-    margin: 15px;
+    margin: 5%;
     align-items: center;
 }
 
@@ -133,8 +160,8 @@ body {
  }
 
 .photo {
-    width: 100px;
-    height: 100px;
+    width: 30%;
+    height: 90%;
     background-color: #efefef;
     border-radius: 100%;
     margin: 0 15px 0 0;
@@ -153,6 +180,11 @@ body {
     cursor: pointer;
 }
 
+.contactData.dark {
+    color: #efefef;
+    background-color: #1D4355;
+}
+
 .contactData p {
     margin: 5px 0 5px 0;
 }
@@ -169,16 +201,24 @@ body {
 .messageSection {
     width: 67%;
     background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .messageHeader {
     display: flex;
     flex-direction: row;
     height: 10%;
+    width: 75%;
     align-items: center;
     text-align: start;
     color: #1D4355;
-    border-bottom: 1px solid #c5c5c5;
+    border: 1px solid #242424;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    background-color: #efefef85;
 }
 
 .photoMiniature {
@@ -205,11 +245,18 @@ body {
 
 .inputDiv {
     height: 10%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #efefef;
+    background-color: #efefef85;
+    border-radius: 10px 10px 0 0;
+}
+
+.messageHeader.dark, .inputDiv.dark, .messageInput.dark {
+    background-color: #3B5c6b;
+    color: #efefef;
 }
 
 .messageInput {
@@ -220,13 +267,18 @@ body {
 }
 
 .sendBtn {
-    height: 30px;
+    background-image: url('./send-light.svg');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
     margin: auto;
     border-radius: 20px;
     margin-right: 20px;
     margin-left: 10px;
-    border: 1px solid #242424;
-    background-color: white;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 @media only screen and (max-width: 800px) {
