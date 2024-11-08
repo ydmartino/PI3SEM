@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import '../assets/chat.css'
+import Recent from '../components/Chat/Recent'
 import Contact from '../components/Chat/Contact'
 
 function Chat() {
-    const contacts = [{
+    const recents = [{
         'nome' : 'Marcelo',
         'mensagem' : 'Bom dia',
         'hora' : '09:52',
@@ -39,6 +40,10 @@ function Chat() {
         'hora' : '00:00'
     }
 ]
+    const contacts = ['Ana', 'Bruno', 'Carla', 'Diego', 'Eduarda', 'Felipe', 'Gabriela', 
+        'Hugo', 'Isabela', 'João', 'Larissa', 'Marcos', 'Natália', 'Otávio', 'Paula', 'Renato', 
+        'Sofia', 'Thiago', 'Vera', 'William']
+
 
 const [ nomeChat, setNomeChat ] = useState('')
 const [ filterShow, setfilterShow ] = useState(false)
@@ -66,15 +71,18 @@ const handleFilter = () => {
 
 function toggleMode () {
     const contactData = document.getElementsByClassName('contactData')
-    const elements = ['page', 'modeBtn', 'contactSection', 'contactHeader', 'filter', 
-        'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 'messageInput', 'openCloseBtn']
+    const contact = document.getElementsByClassName('contact')
+    const elements = ['page', 'modeBtn', 'contactSection', 'recentConv', 'contacts', 'contactHeader', 'filter', 
+        'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 
+        'messageInput', 'openCloseBtn', 'sendBtn']
 
     if(!mode) {
         for (let index = 0; index < elements.length; index++) {
             const element = document.getElementsByClassName(elements[index])[0]
             element.classList.add('dark')
         }
-        for (let index = 0; index < contactData.length; index++) {
+        for (let index = 0; index < contact.length; index++) {
+            contact[index].classList.add('dark')
             contactData[index].classList.add('dark')
         }
         setMode(!mode)
@@ -85,7 +93,8 @@ function toggleMode () {
             const element = document.getElementsByClassName(elements[index])[0]
             element.classList.remove('dark')
         }
-        for (let index = 0; index < contactData.length; index++) {
+        for (let index = 0; index < contact.length; index++) {
+            contact[index].classList.remove('dark')
             contactData[index].classList.remove('dark')
         }
         setMode(!mode)
@@ -125,13 +134,32 @@ function toggleLeftBar () {
 
 }
 
+function toggleRecent () {
+    const recentConv = document.getElementsByClassName('recentConv')[0]
+    const allContacts = document.getElementsByClassName('contacts')[0]
+
+    allContacts.classList.remove('show')
+    recentConv.classList.add('show')
+}
+
+function toggleAllContacts () {
+    const recentConv = document.getElementsByClassName('recentConv')[0]
+    const allContacts = document.getElementsByClassName('contacts')[0]
+
+    recentConv.classList.remove('show')
+    allContacts.classList.add('show')
+}
+
     return (
         <>
             <div className="page">
                 <div className="chatContainer">
                     <div className="contactSection">
                         <div className="contactHeader">
-                            <p>Conversas</p>
+                            <div className="tabs">
+                                <div className="recent" onClick={toggleRecent}>Recentes</div>
+                                <div className="allContacts" onClick={toggleAllContacts}>Contatos</div>
+                            </div>
                             <div className="btns">
                                 <div className="modeBtn" onClick={toggleMode}></div>
                                 <div className="searchIcon" onClick={handleFilter}></div>
@@ -142,11 +170,20 @@ function toggleLeftBar () {
                             <input type="text" className='filter' placeholder='Pesquisar...' onChange={(e) => setSearch(e.target.value)}/>
                         </div>
                         <div className="contactContainer">
-                            {contacts
-                            .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
-                            .map((contact) => (
-                                <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
-                            ))}
+                            <div className="recentConv show">
+                                {recents
+                                .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
+                                .map((contact) => (
+                                    <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
+                                ))}
+                            </div>
+                            <div className="contacts">
+                                {contacts
+                                .filter((contact) => contact.toLowerCase().includes(search.toLowerCase()))
+                                .map((contact) => (
+                                    <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
+                                ))}
+                            </div>
                         </div>
                     </div>
 

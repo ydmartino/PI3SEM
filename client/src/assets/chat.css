@@ -11,32 +11,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #A8E6CF;
-}
-
-.page.dark {
-    background-color: #50707F;
+    background-color: #1E4355;
 }
 
 .chatContainer {
     display: flex;
-    width: 90lvw;
-    height: 90lvh;
-    margin: 5lvh 5lvw;
-    background-color: transparent;
-    -webkit-box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 20px 20px 0px rgba(0,0,0,0.75);
+    width: 100lvw;
+    height: 100lvh;
+    margin: 0lvh 0lvw;
 }
 
 .contactSection {
     width: 33%;
     border-right: 1px solid #c5c5c5;
-    background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
+    background-color: #ffffff;
 }
 
 .contactSection.dark, .messageSection.dark {
-    background-image: linear-gradient(to bottom, #242424, #3a3d4b, #475976, #467aa4, #2a9dd0);
+    background-color: #365B6D;
 }
 
 .contactHeader {
@@ -55,7 +47,19 @@ body {
 }
 
 .contactHeader.dark, .messageHeader.dark {
-    color: #efefef
+    color: #efefef;
+}
+
+.tabs {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.recent, .allContacts {
+    cursor: pointer;
+    width: 50%;
 }
 
 .btns {
@@ -106,6 +110,7 @@ body {
     height: 0;
     display: none;
     transition: .4s ease;
+    border: 1px solid #242424;
 }
 
 .filter.show {
@@ -114,13 +119,47 @@ body {
 }
 
 .filter.dark {
+    color: #efefef;
     background-color: transparent;
+    border: 1px solid #efefef;
 }
 
 .contactContainer {
     height: 90%;
-    overflow: auto;
+    display: flex;
+    flex-direction: row;
     transition: .4s ease;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.recentConv, .contacts {
+    width: 0%;
+    transition: .4s ease;
+    z-index: 0;
+    background-color: #ffffff;
+}
+
+.recentConv.dark, .contacts.dark {
+    width: 0%;
+    transition: .4s ease;
+    z-index: 0;
+    background-color: #365B6D;
+}
+
+.recentConv.show, .contacts.show {
+    width: 100%;
+    transition: .4s ease;
+    z-index: 1;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.recentConv.dark.show, .contacts.dark.show {
+    width: 100%;
+    transition: .4s ease;
+    z-index: 1;
+    background-color: #365B6D;
 }
 
 .contactContainer.reduce {
@@ -145,34 +184,32 @@ body {
 }
 
 .contact {
-    height: 20%;
+    height: 15%;
     background-color: transparent;
     color: #242424;
     display: flex;
     flex-direction: row;
     text-align: start;
-    border-radius: 34px;
-    margin: 5%;
+    border-radius: 10px;
+    margin: 2%;
     align-items: center;
+    padding: 10px;
+    transition: .4s;
 }
 
-.contact:hover > .photo {
-    width: 0;
-    height: 0;
-    margin: 0;
-    border: none;
+.contact:hover {
+    background-color: #efefef;
 }
 
-.contact:hover > .contactData { 
-    width: 100%;
- }
+.contact.dark:hover {
+    background-color: #71878F;
+}
 
 .photo {
-    width: 25%;
-    height: 70%;
+    width: 80px;
+    height: 80px;
     background-color: #efefef;
     border-radius: 100%;
-    margin: 0 15px 0 0;
     border: 1px solid #242424;
     transition: .4s ease;
 }
@@ -182,15 +219,14 @@ body {
     flex-direction: column;
     width: 80%;
     border-radius: 40px;
-    background-color: #efefef;
-    padding: 20px;
+    background-color: transparent;
+    padding: 0 20px 0 20px;
     transition: .4s ease;
     cursor: pointer;
 }
 
 .contactData.dark {
     color: #efefef;
-    background-color: #1D4355;
 }
 
 .contactData p {
@@ -208,7 +244,7 @@ body {
 
 .messageSection {
     width: 67%;
-    background-image: linear-gradient(to bottom, #ffffff, #dfe2f4, #b6c9ea, #81b2df, #2a9dd0);
+    background-color: #efefef;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,7 +262,7 @@ body {
     border: 1px solid #242424;
     border-top: none;
     border-radius: 0 0 20px 20px;
-    background-color: #efefef85;
+    background-color: #ffffff;
 }
 
 .photoMiniature {
@@ -258,13 +294,15 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #efefef85;
+    background-color: #ffffff;
     border-radius: 10px 10px 0 0;
+    border: 1px solid #242424;
 }
 
 .messageHeader.dark, .inputDiv.dark, .messageInput.dark {
-    background-color: #3B5c6b;
+    background-color: #71878F;
     color: #efefef;
+    border: 1px solid #efefef;
 }
 
 .messageInput {
@@ -272,6 +310,19 @@ body {
     display: inherit;
     margin-left: 20px;
     margin-top: 10px;
+    border: 1px solid #242424;
+}
+
+.messageInput.dark {
+    border: 1px solid #efefef;
+}
+
+.messageInput.dark::placeholder, .filter.dark::placeholder {
+    color: #efefef;
+}
+
+.messageHeader.dark {
+    border-top: none;
 }
 
 .sendBtn {
@@ -289,6 +340,10 @@ body {
     border: none;
 }
 
+.sendBtn.dark {
+    background-image: url('./send-dark.svg');
+}
+
 @media only screen and (max-width: 720px) {
     .contactSection {
         width: 10%;
@@ -300,8 +355,8 @@ body {
     }
 
     .photo {
-        width: 20%;
-        height: 70%;
+        width: 70px;
+        height: 70px;
     }
 
     .contact {
