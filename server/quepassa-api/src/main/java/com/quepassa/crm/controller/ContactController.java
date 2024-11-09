@@ -18,9 +18,9 @@ public class ContactController {
     
     @Autowired
     private ContactsRepository contactsRepository;
-
+    
     @GetMapping
-    public List<Contacts> listClients(){
+    public List<Contacts> listContacts(){
         return contactsRepository.findAll();
     }
 }

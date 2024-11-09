@@ -7,14 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 
-@Entity(name = "LastViewed")
-@IdClass(PKLastViewed.class)
+@Entity(name = "LastViewed") //Entity name
+@IdClass(PKLastViewed.class) //Composite Primary Key of LastViewed object will be verified using the PKLastViewed class
 public class LastViewed implements Serializable{
     
-    @Id
-    @Column(nullable = false)
+    @Id //Primary Key
+    @Column(nullable = false) //Not Null
     private int fromIdUser;
-    @Id
+    @Id //The other Primary Key
     @Column(nullable = false)
     private int toIdUser;
     @Column(nullable = false)
@@ -44,6 +44,8 @@ public class LastViewed implements Serializable{
         this.dateTime = dateTime;
     }
 
+    //Hashcode and Equals
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -52,7 +54,7 @@ public class LastViewed implements Serializable{
         result = prime * result + toIdUser;
         return result;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

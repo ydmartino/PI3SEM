@@ -6,17 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "MessageHistory")
+@Entity(name = "MessageHistory") //Entity Name
 public class MessageHistory {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//delegate to DB the responsability to increment ID number
+    @Id //Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//Delegate to DB the responsability to auto-increment ID number
     private int id;
    
 
 
 
-    @Column(nullable = false)
+    @Column(nullable = false)//Not Null
     private String message;
     @Column(nullable = false)
     private String dateTime;

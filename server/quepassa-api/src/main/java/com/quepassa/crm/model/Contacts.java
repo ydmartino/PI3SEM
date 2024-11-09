@@ -9,11 +9,11 @@ import jakarta.persistence.Id;
 @Entity(name = "Contacts")
 public class Contacts {
 
-    @Id //Identifies in DB a primareKey 
-    @GeneratedValue( strategy = GenerationType.IDENTITY)//delegate to DB the responsability to increment ID number
+    @Id //Identifies Primary Key in DB
+    @GeneratedValue( strategy = GenerationType.IDENTITY)//Delegate to DB the responsibility to increment ID number
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false)//States this field can not be Null
     private String password;
 
     @Column(nullable = false)
@@ -21,6 +21,8 @@ public class Contacts {
 
     @Column(nullable = false)
     private boolean isAdmin;
+
+    //Getters and Setters
 
     public int getId() {
         return this.id;
@@ -57,6 +59,9 @@ public class Contacts {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+
+    //HashCodes
 
     @Override
     public int hashCode() {
