@@ -1,10 +1,10 @@
 import React from 'react'
 import Contact from './Contact'
+import axios from 'axios'
 
 export function AllContactsContainer({ search, nomeChat, setNomeChat }) {
-    const contacts = ['Ana', 'Bruno', 'Carla', 'Diego', 'Eduarda', 'Felipe', 'Gabriela', 
-        'Hugo', 'Isabela', 'João', 'Larissa', 'Marcos', 'Natália', 'Otávio', 'Paula', 'Renato', 
-        'Sofia', 'Thiago', 'Vera', 'William']
+  
+    const contacts = axios.get('http://localhost:8080/Contacts')
 
   return (
     <div className="contacts">
