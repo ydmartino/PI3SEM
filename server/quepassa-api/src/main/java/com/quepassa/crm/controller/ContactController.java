@@ -22,8 +22,9 @@ public class ContactController {
     private ContactsRepository contactsRepository;
     
     @GetMapping
-    public String olaMundo(){
-		return "olá mundo!";
+    public Contacts greetingWithJavaConfig(@RequestParam(required = false, defaultValue = "World") String name) {
+		System.out.println("Ola Mundo!");
+        return new Contacts();
 	}
 
     
