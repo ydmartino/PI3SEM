@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.quepassa.crm.model.Contacts;
 
 import com.quepassa.crm.repository.ContactsRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -20,7 +22,13 @@ public class ContactController {
     private ContactsRepository contactsRepository;
     
     @GetMapping
+    public String olaMundo(){
+		return "olá mundo!";
+	}
+
+    
+    /*@GetMapping
     public List<Contacts> listContacts(){
         return contactsRepository.findAll();
-    }
+    }*/
 }
