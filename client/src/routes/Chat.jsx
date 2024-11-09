@@ -1,49 +1,9 @@
 import React, { useState } from 'react'
 import '../assets/chat.css'
-import Recent from '../components/Chat/Recent'
-import Contact from '../components/Chat/Contact'
+import { MessageSection } from '../components/Chat/MessageSection'
+import ContactSection from '../components/Chat/ContactSection'
 
 function Chat() {
-    const recents = [{
-        'nome' : 'Marcelo',
-        'mensagem' : 'Bom dia',
-        'hora' : '09:52',
-    },
-    {
-        'nome' : 'Diego',
-        'mensagem' : 'Boa tarde',
-        'hora' : '14:30'
-    },
-    {
-        'nome' : 'Samuel',
-        'mensagem' : 'Boa noite',
-        'hora' : '20:22'
-    },
-    {
-        'nome' : 'Renan',
-        'mensagem' : 'Lmao',
-        'hora' : '00:52'
-    },
-    {
-        'nome' : 'Yuri',
-        'mensagem' : 'Lranja',
-        'hora' : '00:53'
-    },
-    {
-        'nome' : 'Victor',
-        'mensagem' : 'Falando nisso...',
-        'hora' : '17:01'
-    },
-    {
-        'nome' : 'Vinicius',
-        'mensagem' : 'Olá',
-        'hora' : '00:00'
-    }
-]
-    const contacts = ['Ana', 'Bruno', 'Carla', 'Diego', 'Eduarda', 'Felipe', 'Gabriela', 
-        'Hugo', 'Isabela', 'João', 'Larissa', 'Marcos', 'Natália', 'Otávio', 'Paula', 'Renato', 
-        'Sofia', 'Thiago', 'Vera', 'William']
-
 
 const [ nomeChat, setNomeChat ] = useState('')
 const [ filterShow, setfilterShow ] = useState(false)
@@ -154,57 +114,10 @@ function toggleAllContacts () {
         <>
             <div className="page">
                 <div className="chatContainer">
-                    <div className="contactSection">
-                        <div className="contactHeader">
-                            <div className="tabs">
-                                <div className="recent" onClick={toggleRecent}>Recentes</div>
-                                <div className="allContacts" onClick={toggleAllContacts}>Contatos</div>
-                            </div>
-                            <div className="btns">
-                                <div className="modeBtn" onClick={toggleMode}></div>
-                                <div className="searchIcon" onClick={handleFilter}></div>
-                            </div>
-                            <div className="openCloseBtn" onClick={toggleLeftBar}></div>
-                        </div>
-                        <div className="filterSection">
-                            <input type="text" className='filter' placeholder='Pesquisar...' onChange={(e) => setSearch(e.target.value)}/>
-                        </div>
-                        <div className="contactContainer">
-                            <div className="recentConv show">
-                                {recents
-                                .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
-                                .map((contact) => (
-                                    <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
-                                ))}
-                            </div>
-                            <div className="contacts">
-                                {contacts
-                                .filter((contact) => contact.toLowerCase().includes(search.toLowerCase()))
-                                .map((contact) => (
-                                    <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="messageSection">
-                        <div className="messageHeader">
-                            <div className="photoMiniature"></div>
-                            <div className="headerData">
-                                <p className='nameHeader'>{nomeChat}</p>
-                                <p className='statusHeader'>On-line</p>
-                            </div>
-                        </div>
-                        <div className="messageContainer">
-                            {
-
-                            }
-                        </div>
-                        <div className="inputDiv">
-                            <input type="text" className="messageInput" placeholder='Digite sua mensagem...' />
-                            <button type='submit' className='sendBtn'></button>
-                        </div>
-                    </div>
+                    <ContactSection toggleRecent={toggleRecent} toggleAllContacts={toggleAllContacts}
+                    toggleMode={toggleMode} handleFilter={handleFilter} toggleLeftBar={toggleLeftBar}
+                    setSearch={setSearch} search={search} setNomeChat={setNomeChat} nomeChat={nomeChat} />
+                    <MessageSection nomeChat={nomeChat} />
                 </div>
             </div>
         </>
