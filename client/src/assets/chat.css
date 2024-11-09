@@ -1,79 +1,232 @@
 body {
-    background-image: url('./bg-login.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
     margin: 0;
-  }
-  
+    font-family: "Comic Sans MS", "Comic Sans", cursive;  
+}
+
+* {
+    box-sizing: border-box;
+}
+
 .page {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #1E4355;
 }
 
 .chatContainer {
     display: flex;
-    width: 90lvw;
-    height: 90lvh;
-    margin: 5lvh 5lvw;
-    background-color: transparent;
+    width: 100lvw;
+    height: 100lvh;
+    margin: 0lvh 0lvw;
 }
 
 .contactSection {
     width: 33%;
-    background-color: #ebedeb;
+    border-right: 1px solid #c5c5c5;
+    background-color: #ffffff;
+}
+
+.contactSection.dark, .messageSection.dark {
+    background-color: #365B6D;
 }
 
 .contactHeader {
     height: 10%;
-    background-color: #e8e9eb;
-    border-right: 1px solid #c5c5c5;
-    border-bottom: 1px solid #c5c5c5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #242424;
+    padding: 10px;
+}
+
+.contactHeader p {
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.contactHeader.dark, .messageHeader.dark {
+    color: #efefef;
+}
+
+.tabs {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.recent, .allContacts {
+    cursor: pointer;
+    width: 50%;
+}
+
+.btns {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.searchIcon {
+    width: 40px;
+    height: 40px;
+    background-image: url('./search-light.svg');
+    background-size: cover;
+    cursor: pointer;
+    transition: .4s ease;
+    border-radius: 10px;
+}
+
+.searchIcon:hover {
+    background-color: #cccccc;
+}
+
+.searchIcon.dark {
+    background-image: url('./search-dark.svg');
+}
+
+.openCloseBtn {
+    display: none;
 }
 
 .filterSection {
-    background-color: #e8e9eb;
-    height: 10%;
+    height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .4s ease;
+}
+
+.filterSection.show {
+    height: 5%;
+    transition: .4s ease;
 }
 
 .filter {
     width: 90%;
-    padding: 5px;
+    height: 0;
+    display: none;
+    transition: .4s ease;
+    border: 1px solid #242424;
+}
+
+.filter.show {
+    height: 100%;
+    display: block;
+}
+
+.filter.dark {
+    color: #efefef;
+    background-color: transparent;
+    border: 1px solid #efefef;
 }
 
 .contactContainer {
-    height: 80%;
-    overflow: auto;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    transition: .4s ease;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.recentConv, .contacts {
+    width: 0%;
+    transition: .4s ease;
+    z-index: 0;
+    background-color: #ffffff;
+}
+
+.recentConv.dark, .contacts.dark {
+    width: 0%;
+    transition: .4s ease;
+    z-index: 0;
+    background-color: #365B6D;
+}
+
+.recentConv.show, .contacts.show {
+    width: 100%;
+    transition: .4s ease;
+    z-index: 1;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.recentConv.dark.show, .contacts.dark.show {
+    width: 100%;
+    transition: .4s ease;
+    z-index: 1;
+    background-color: #365B6D;
+}
+
+.contactContainer.reduce {
+    height: 85%;
+    transition: .4s ease;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .contact {
-    height: 20%;
+    height: 15%;
     background-color: transparent;
     color: #242424;
-    margin: 5px;
     display: flex;
     flex-direction: row;
     text-align: start;
     border-radius: 10px;
-    padding: 10px;
+    margin: 2%;
     align-items: center;
+    padding: 10px;
+    transition: .4s;
+}
+
+.contact:hover {
+    background-color: #efefef;
+}
+
+.contact.dark:hover {
+    background-color: #71878F;
 }
 
 .photo {
-    width: 60px;
-    height: 60px;
-    background-color: #242424;
+    width: 80px;
+    height: 80px;
+    background-color: #efefef;
     border-radius: 100%;
-    margin: 0 15px 0 0;
+    border: 1px solid #242424;
+    transition: .4s ease;
 }
 
 .contactData {
-    display: inherit;
+    display: flex;
     flex-direction: column;
     width: 80%;
+    border-radius: 40px;
+    background-color: transparent;
+    padding: 0 20px 0 20px;
+    transition: .4s ease;
+    cursor: pointer;
+}
+
+.contactData.dark {
+    color: #efefef;
 }
 
 .contactData p {
@@ -91,26 +244,35 @@ body {
 
 .messageSection {
     width: 67%;
-    background-color: #e6dfd9;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .messageHeader {
     display: flex;
     flex-direction: row;
     height: 10%;
-    background-color: #e8e9eb;
+    width: 75%;
     align-items: center;
     text-align: start;
-    color: #242424;
+    color: #1D4355;
+    border: 1px solid #242424;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    background-color: #ffffff;
 }
 
 .photoMiniature {
     width: 50px;
     height: 50px;
-    background-color: #242424;
+    background-color: #ffffff;
     border-radius: 100%;
     margin-left: 10px;
     margin-right: 10px;
+    border: 1px solid #242424;
 }
 
 .nameHeader, .statusHeader {
@@ -127,25 +289,141 @@ body {
 
 .inputDiv {
     height: 10%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
-    background-color: #e8e9eb;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #242424;
+}
+
+.messageHeader.dark, .inputDiv.dark, .messageInput.dark {
+    background-color: #71878F;
+    color: #efefef;
+    border: 1px solid #efefef;
 }
 
 .messageInput {
     width: 90%;
     display: inherit;
     margin-left: 20px;
+    margin-top: 10px;
+    border: 1px solid #242424;
+}
+
+.messageInput.dark {
+    border: 1px solid #efefef;
+}
+
+.messageInput.dark::placeholder, .filter.dark::placeholder {
+    color: #efefef;
+}
+
+.messageHeader.dark {
+    border-top: none;
 }
 
 .sendBtn {
-    height: 30px;
+    background-image: url('./send-light.svg');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
     margin: auto;
     border-radius: 20px;
     margin-right: 20px;
     margin-left: 10px;
-    border: 1px solid #242424;
-    background-color: white;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.sendBtn.dark {
+    background-image: url('./send-dark.svg');
+}
+
+@media only screen and (max-width: 720px) {
+    .contactSection {
+        width: 10%;
+        transition: .2s ease;
+    }
+
+    .contactSection.open {
+        width: 100%;
+    }
+
+    .photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .contact {
+        margin: 5px 10px;
+    }
+
+    .btns, .filterSection, .contactContainer, .contactHeader p {
+        display: none;
+    }
+    
+    .openCloseBtn {
+        display: flex;
+        background: url('./open-right-light.svg') no-repeat center center;
+        background-size: cover;
+        width: 50px;
+        height: 20px;
+        cursor: pointer;
+        transition: .4s ease;
+    }
+
+    .openCloseBtn.dark {
+        display: flex;
+        background: url('./open-right-dark.svg') no-repeat center center;
+        background-size: cover;
+        width: 50px;
+        height: 20px;
+        cursor: pointer;
+        transition: .4s ease;
+    }
+
+    .openCloseBtn.clicked {
+        display: flex;
+        background: url('./close-left-light.svg') no-repeat center center;
+        background-size: cover;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .openCloseBtn.clicked.dark {
+        display: flex;
+        background: url('./close-left-dark.svg') no-repeat center center;
+        background-size: cover;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .btns.show, .filterSection.show, .contactHeader.show p {
+        display: flex;
+    }
+
+    .contactContainer.show {
+        display: block;
+        height: 85%;
+    }
+
+    .messageSection {
+        width: 90%;
+        transition: .4s ease;
+    }
+
+    .messageSection.reduce {
+        width: 0%;
+    }
+
+    .messageSection.reduce > * {
+        display: none; 
+    }
 }

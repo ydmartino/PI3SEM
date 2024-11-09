@@ -1,5 +1,5 @@
 body {
-    background-image: url('./bg-login.jpg');
+    background-color: #A8E6CF;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
@@ -42,6 +42,10 @@ h1 {
     height: 40px;
     transition: .3 ease;
     margin: 5px;
+    cursor: pointer;
+    transition: .4s ease;
+    border-radius: 10px;
+
 }
 
 .loginContainer {
@@ -91,7 +95,7 @@ h1 {
     transition: .4s;
 }
 
-.slider:before {
+.slider::before {
     position: absolute;
     content: "";
     height: 23px;
@@ -120,7 +124,7 @@ input:checked + .slider:before {
 .slider.round {
     border-radius: 34px;
 }
-.slider.round:before {
+.slider.round::before {
     border-radius: 50%;
 }
 
