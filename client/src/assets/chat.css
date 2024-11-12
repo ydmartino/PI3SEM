@@ -25,6 +25,7 @@ body {
     width: 33%;
     border-right: 1px solid #c5c5c5;
     background-color: #ffffff;
+    flex-wrap: wrap;
 }
 
 .contactSection.dark, .messageSection.dark {
@@ -51,33 +52,47 @@ body {
 }
 
 .tabs {
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .recent, .allContacts {
     cursor: pointer;
     width: 50%;
+    transition: .4s ease;
+}
+
+.recent.selected, .allContacts.selected {
+    border-bottom: 1px solid #242424;
+}
+
+.recent.selected.dark, .allContacts.selected.dark {
+    border-bottom: 1px solid #efefef;
 }
 
 .btns {
-    width: 20%;
+    width: 35%;
     height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
 }
 
-.searchIcon {
-    width: 40px;
-    height: 40px;
-    background-image: url('./search-light.svg');
+.searchIcon, .modeBtn {
+    width: 30px;
+    height: 30px;
     background-size: cover;
     cursor: pointer;
     transition: .4s ease;
     border-radius: 10px;
+}
+
+.searchIcon {
+    background-image: url('./search-light.svg');
 }
 
 .searchIcon:hover {
@@ -344,7 +359,7 @@ body {
     background-image: url('./send-dark.svg');
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 800px) {
     .contactSection {
         width: 10%;
         transition: .2s ease;
@@ -363,7 +378,15 @@ body {
         margin: 5px 10px;
     }
 
-    .btns, .filterSection, .contactContainer, .contactHeader p {
+    .tabs.show {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .tabs, .btns, .filterSection, .contactContainer, .contactHeader p {
         display: none;
     }
     
