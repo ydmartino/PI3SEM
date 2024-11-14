@@ -7,7 +7,7 @@ const handleOpenChat = () => {
 }
 
   return (
-    <div className="contact" onClick={handleOpenChat}>
+    <div className="recentConvItem" onClick={handleOpenChat}>
         <div className="photo"></div>
         <div className="contactData">
             <div className="name">

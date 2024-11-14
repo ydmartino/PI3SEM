@@ -170,6 +170,22 @@ body {
     overflow-y: auto;
 }
 
+.recentConv > .recentConvItem {
+    display: none;
+}
+
+.recentConv.show > .recentConvItem {
+    display: flex;
+}
+
+.contacts > .contact {
+    display: none;
+}
+
+.contacts.show > .contact {
+    display: flex;
+}
+
 .recentConv.dark.show, .contacts.dark.show {
     width: 100%;
     transition: .4s ease;
@@ -198,7 +214,7 @@ body {
     background: #555;
 }
 
-.contact {
+.contact, .recentConvItem {
     height: 15%;
     background-color: transparent;
     color: #242424;
@@ -435,6 +451,7 @@ body {
     .contactContainer.show {
         display: block;
         height: 85%;
+        overflow-y: auto;
     }
 
     .messageSection {
@@ -448,5 +465,9 @@ body {
 
     .messageSection.reduce > * {
         display: none; 
+    }
+
+    .filter {
+        margin: 5px 0 0 0;
     }
 }

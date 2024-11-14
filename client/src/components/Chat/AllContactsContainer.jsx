@@ -7,8 +7,8 @@ export function AllContactsContainer({ search, nomeChat, setNomeChat }) {
   const [ contacts, setContacts ] = useState([])
 
   async function getContacts () {
-    const fetchContacts = await axios.get('http://localhost:8080/Contacts')
-    setContacts(fetchContacts)
+    //const fetchContacts = await axios.get('http://localhost:8080/Contacts')
+    setContacts(["AA", "bb", "cc", "dd", "ee", "FF", "gg", "HH", "II", "jj"])
   }
 
   useEffect(() => {
@@ -17,12 +17,11 @@ export function AllContactsContainer({ search, nomeChat, setNomeChat }) {
 
   return (
     <div className="contacts">
-        {/*contacts
+        {contacts
         .filter((contact) => contact.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
             <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
-        ))*/
-        console.log(contacts)
+        ))
         }
     </div>
   )
