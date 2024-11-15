@@ -232,7 +232,7 @@ body {
     background-color: #efefef;
 }
 
-.contact.dark:hover {
+.contact.dark:hover, .recentConvItem:hover {
     background-color: #71878F;
 }
 
@@ -286,7 +286,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 10%;
-    width: 75%;
+    width: 85%;
     align-items: center;
     text-align: start;
     color: #1D4355;
@@ -316,6 +316,83 @@ body {
 
 .messageContainer {
     height: 80%;
+    width: 100%;
+}
+
+.messageList {
+    width: 100%;
+    height: 100%;
+    color: #242424;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.other-message, .own-message {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 10px 10%;
+    border: 1px solid #242424;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 10px 8px 5px 0px rgba(36,36,36, .9);
+}
+
+.other-message.dark, .own-message.dark {
+    border: 1px solid #efefef;
+    box-shadow: none;
+}
+
+.other-message.dark {
+    color: #efefef;
+    background-color: #71878F;
+}
+
+.other-message {
+    justify-content: left;
+    align-items: start;
+    background-color: #ffffff;
+}
+
+.own-message.dark {
+    color: #efefef;
+    background-color: #1D4355;
+}
+
+.own-message {
+    align-self: end;
+    justify-content: right;
+    align-items: end;
+    background-color: #289DD2;
+}
+
+.nomeMsg {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 900;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.msgInfo {
+    width: 100%;
+    text-align: left;
+}
+
+.msg, .time {
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.time {
+    text-align: right;
 }
 
 .inputDiv {
