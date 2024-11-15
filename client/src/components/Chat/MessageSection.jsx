@@ -7,7 +7,7 @@ export function MessageSection({ nomeChat }) {
   return (
     <div className="messageSection">
         <MsgHeader nomeChat={nomeChat} />
-        <MsgContainer />
+        <MsgContainer nomeChat={nomeChat} />
         <MsgInput />
     </div>
   )

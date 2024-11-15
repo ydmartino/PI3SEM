@@ -1,16 +1,18 @@
 import React from 'react'
 
-function LoginHeader({ toggleForm, toggleDark }) {
+function LoginHeader({ toggleForm, toggleDark, logging }) {
 
     return (
-        <div className="loginHeader">
-                    <p>Login</p>
-                    <label className='switch'>
-                        <input type="checkbox" />
-                        <span className='slider round' onClick={toggleForm}></span>
-                    </label>
-                    <p>Cadastro</p>
-                </div>
+        <>
+            <div className="loginHeader">
+                <label className='switch'>
+                    <input type="checkbox" />
+                    <span className='slider round' onClick={toggleForm}></span>
+                </label>
+            </div>
+            <p className='headerTitle'>{logging ? 'Login' : 'Cadastro'}</p>
+        </>
+        
     )
 }
 

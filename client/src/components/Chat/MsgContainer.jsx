@@ -1,11 +1,9 @@
 import React from 'react'
+import { MessageContainer } from './MessageContainer'
 
-export function MsgContainer() {
+export function MsgContainer({ nomeChat }) {
+
   return (
-        <div className="messageContainer">
-            {
-
-            }
-        </div>
+        <MessageContainer nomeChat={nomeChat} />
   )
 }

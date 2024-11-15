@@ -32,7 +32,10 @@ const handleFilter = () => {
 function toggleMode () {
     const contactData = document.getElementsByClassName('contactData')
     const contact = document.getElementsByClassName('contact')
-    const elements = ['page', 'modeBtn', 'contactSection', 'recentConv', 'contacts', 'contactHeader', 'filter', 
+    const recents = document.getElementsByClassName('recentConvItem')
+    const othermsg = document.getElementsByClassName('other-message')
+    const ownmsg = document.getElementsByClassName('own-message')
+    const elements = ['page', 'modeBtn', 'contactSection', 'recentConv', 'contacts', 'recent', 'allContacts', 'contactHeader', 'filter', 
         'searchIcon', 'messageSection', 'messageHeader', 'inputDiv', 
         'messageInput', 'openCloseBtn', 'sendBtn']
 
@@ -44,6 +47,15 @@ function toggleMode () {
         for (let index = 0; index < contact.length; index++) {
             contact[index].classList.add('dark')
             contactData[index].classList.add('dark')
+        }
+        for (let index = 0; index < recents.length; index++) {
+            recents[index].classList.add('dark')
+        }
+        for (let index = 0; index < othermsg.length; index++) {
+            othermsg[index].classList.add('dark')
+        }
+        for (let index = 0; index < ownmsg.length; index++) {
+            ownmsg[index].classList.add('dark')
         }
         setMode(!mode)
     } 
@@ -57,6 +69,15 @@ function toggleMode () {
             contact[index].classList.remove('dark')
             contactData[index].classList.remove('dark')
         }
+        for (let index = 0; index < recents.length; index++) {
+            recents[index].classList.remove('dark')
+        }
+        for (let index = 0; index < othermsg.length; index++) {
+            othermsg[index].classList.remove('dark')
+        }
+        for (let index = 0; index < ownmsg.length; index++) {
+            ownmsg[index].classList.remove('dark')
+        }
         setMode(!mode)
     }
 }
@@ -66,7 +87,7 @@ function toggleLeftBar () {
     const messageSection = document.getElementsByClassName('messageSection')[0]
     const openCloseBtn = document.getElementsByClassName('openCloseBtn')[0]
     const contactHeader = document.getElementsByClassName('contactHeader')[0]
-    const elements = ['btns', 'filterSection', 'contactContainer']
+    const elements = ['tabs', 'btns', 'filterSection', 'contactContainer']
 
     if(!leftBar) {
         contactSection.classList.add('open')
@@ -97,17 +118,25 @@ function toggleLeftBar () {
 function toggleRecent () {
     const recentConv = document.getElementsByClassName('recentConv')[0]
     const allContacts = document.getElementsByClassName('contacts')[0]
+    const recentTab = document.getElementsByClassName('recent')[0]
+    const allContactsTab = document.getElementsByClassName('allContacts')[0]
 
     allContacts.classList.remove('show')
+    allContactsTab.classList.remove('selected')
     recentConv.classList.add('show')
+    recentTab.classList.add('selected')
 }
 
 function toggleAllContacts () {
     const recentConv = document.getElementsByClassName('recentConv')[0]
     const allContacts = document.getElementsByClassName('contacts')[0]
+    const recentTab = document.getElementsByClassName('recent')[0]
+    const allContactsTab = document.getElementsByClassName('allContacts')[0]
 
     recentConv.classList.remove('show')
+    recentTab.classList.remove('selected')
     allContacts.classList.add('show')
+    allContactsTab.classList.add('selected')
 }
 
     return (

@@ -42,7 +42,7 @@ function Login() {
             </div>
 
             <div className="loginContainer">
-                <LoginHeader toggleForm={toggleForm} toggleDark={toggleDark} />
+                <LoginHeader toggleForm={toggleForm} toggleDark={toggleDark} logging={logging} />
                 <LoginForm logging={logging} />
                 <SignUpForm logging={logging} />
             </div>
