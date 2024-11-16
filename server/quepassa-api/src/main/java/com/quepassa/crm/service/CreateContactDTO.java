@@ -1,4 +1,4 @@
-package com.quepassa.crm.controller;
+package com.quepassa.crm.service;
 
 public record CreateContactDTO(
     //Implement here every variable created or modified manually
