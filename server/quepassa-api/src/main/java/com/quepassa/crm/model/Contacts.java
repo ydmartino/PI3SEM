@@ -191,10 +191,8 @@ public class Contacts implements UserDetails{
         return authorities;
     }
 
-    @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return name;
     }
 
 }
