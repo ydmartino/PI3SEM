@@ -1,9 +1,9 @@
 import React from 'react'
 import { MessageContainer } from './MessageContainer'
 
-export function MsgContainer({ nomeChat }) {
+export function MsgContainer({ nomeChat, theme }) {
 
   return (
-        <MessageContainer nomeChat={nomeChat} />
+        <MessageContainer nomeChat={nomeChat} theme={theme} />
   )
 }

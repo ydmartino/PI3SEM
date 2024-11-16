@@ -5,7 +5,7 @@ import { OpenCloseBtn } from './OpenCloseBtn'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
 
-function ContactHeader({ handleFilter, toggleLeftBar, activeTab, setActiveTab }) {
+function ContactHeader({ handleFilter, activeTab, setActiveTab, leftBarStatus, toggleLeftBar }) {
 
   const { theme, toggleTheme } = useContext(ThemeContext)
 
@@ -16,9 +16,12 @@ function ContactHeader({ handleFilter, toggleLeftBar, activeTab, setActiveTab })
 
   return (
     <div className={`contactHeader ${theme}`}>
-        <Tabs activeTab={activeTab} toggleTabs={toggleTabs} />
-        <Btns handleFilter={handleFilter} />
-        <OpenCloseBtn toggleLeftBar={toggleLeftBar} />
+        <Tabs activeTab={activeTab} toggleTabs={toggleTabs} 
+        leftBarStatus={leftBarStatus} />
+
+        <Btns handleFilter={handleFilter} leftBarStatus={leftBarStatus} />
+
+        <OpenCloseBtn leftBarStatus={leftBarStatus} toggleLeftBar={toggleLeftBar} />
     </div>
   )
 }

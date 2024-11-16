@@ -1,10 +1,10 @@
 import React from 'react'
 
-export function MsgInput() {
+export function MsgInput({ theme }) {
   return (
-        <div className="inputDiv">
-            <input type="text" className="messageInput" placeholder='Digite sua mensagem...' />
-            <button type='submit' className='sendBtn'></button>
+        <div className={`inputDiv ${theme}`}>
+            <input type="text" className={`messageInput ${theme}`} placeholder='Digite sua mensagem...' />
+            <button type='submit' className={`sendBtn ${theme}`}></button>
         </div>
   )
 }

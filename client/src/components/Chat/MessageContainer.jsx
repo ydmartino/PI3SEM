@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { Message } from './Message'
 
-export function MessageContainer({ nomeChat }) {
+export function MessageContainer({ nomeChat, theme }) {
 
     useEffect(() => {
         const doc = document.getElementsByClassName('messageList')[0]
         doc.scrollTo(0, doc.scrollHeight)
       }, [ nomeChat ])
+
+      console.log(theme)
 
     const messages = [
         {
@@ -53,7 +55,7 @@ export function MessageContainer({ nomeChat }) {
             {
               messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp))
               .map((message) => (
-                  <Message nomeChat={nomeChat} de={message.de} msg={message.msg} time={message.timestamp} />
+                  <Message nomeChat={nomeChat} de={message.de} msg={message.msg} time={message.timestamp} theme={theme} />
               ))
             }
             </ul>

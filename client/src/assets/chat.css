@@ -229,19 +229,19 @@ body {
     transition: .4s;
 }
 
-.contact.dark > .contactData {
-    color: #efefef;
-}
-
 .recentConvItem.dark > .contactData {
     color: #efefef;
 }
 
-.contact:hover {
+.contact:hover, .recentConvItem:hover {
     background-color: #efefef;
 }
 
-.contact.dark:hover, .recentConvItem:hover {
+.contact.dark > .contactData {
+    color: #efefef;
+}
+
+.contact.dark:hover, .recentConvItem.dark:hover {
     background-color: #71878F;
 }
 
@@ -285,6 +285,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: .4s ease;
 }
 
 .messageHeader {
@@ -299,6 +300,7 @@ body {
     border-top: none;
     border-radius: 0 0 20px 20px;
     background-color: #ffffff;
+    transition: .4s ease;
 }
 
 .photoMiniature {
@@ -357,7 +359,7 @@ ul {
 
 .other-message.dark {
     color: #efefef;
-    background-color: #71878F;
+    background-color: #365B6D;
 }
 
 .other-message {
@@ -368,7 +370,7 @@ ul {
 
 .own-message.dark {
     color: #efefef;
-    background-color: #365B6D;
+    background-color: #398d8b;
 }
 
 .own-message {
@@ -410,6 +412,7 @@ ul {
     background-color: #ffffff;
     border-radius: 10px 10px 0 0;
     border: 1px solid #242424;
+    transition: .4s ease;
 }
 
 .messageHeader.dark, .inputDiv.dark, .messageInput.dark {
@@ -424,6 +427,7 @@ ul {
     margin-left: 20px;
     margin-top: 10px;
     border: 1px solid #242424;
+    transition: .4s ease;
 }
 
 .messageInput.dark {
@@ -460,7 +464,7 @@ ul {
 @media only screen and (max-width: 800px) {
     .contactSection {
         width: 10%;
-        transition: .2s ease;
+        transition: .4s ease;
     }
 
     .contactSection.open {
