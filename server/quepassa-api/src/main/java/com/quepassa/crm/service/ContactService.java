@@ -41,7 +41,6 @@ public class ContactService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException{
-
         Contacts contact = contactsRepository.findByEmailOrName(usernameOrEmail, usernameOrEmail).orElseThrow(() -> new UsernameNotFoundException("User not found with username or email: " + usernameOrEmail));
         return new org.springframework.security.core.userdetails.User(contact.getEmail(),contact.getPassword(),contact.getAuthorities());
     }

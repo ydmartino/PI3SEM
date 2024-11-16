@@ -34,6 +34,7 @@ public class AuthController{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDTO){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -42,6 +43,7 @@ public class AuthController{
         return new ResponseEntity<>("User signed-in succesfully!", HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@RequestBody SignupDTO signupDTO){
         //Checks if Email already exists in database
