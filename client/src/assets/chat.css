@@ -64,6 +64,7 @@ body {
     cursor: pointer;
     width: 50%;
     transition: .4s ease;
+    border: none;
 }
 
 .recent.selected, .allContacts.selected {
@@ -75,7 +76,7 @@ body {
 }
 
 .btns {
-    width: 35%;
+    width: 20%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -92,46 +93,25 @@ body {
     border-radius: 10px;
 }
 
-.searchIcon {
-    background-image: url('./search-light.svg');
-}
-
-.searchIcon:hover {
-    background-color: #cccccc;
-}
-
-.searchIcon.dark {
-    background-image: url('./search-dark.svg');
-}
-
 .openCloseBtn {
     display: none;
 }
 
 .filterSection {
-    height: 0;
+    height: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: .4s ease;
 }
 
-.filterSection.show {
-    height: 5%;
-    transition: .4s ease;
-}
-
 .filter {
     width: 90%;
-    height: 0;
-    display: none;
-    transition: .4s ease;
-    border: 1px solid #242424;
-}
-
-.filter.show {
     height: 100%;
     display: block;
+    transition: .4s ease;
+    border: 1px solid #242424;
+    transition: .4s ease;
 }
 
 .filter.dark {
@@ -141,7 +121,7 @@ body {
 }
 
 .contactContainer {
-    height: 90%;
+    height: 85%;
     display: flex;
     flex-direction: row;
     transition: .4s ease;
@@ -483,14 +463,20 @@ ul {
     .tabs.show {
         width: 50%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-around;
         flex-wrap: wrap;
     }
 
     .tabs, .btns, .filterSection, .contactContainer, .contactHeader p {
         display: none;
+        transition: .4s ease;
     }
+
+    .filterSection.show{
+        display: flex;
+    }
+
     
     .openCloseBtn {
         display: flex;
@@ -503,13 +489,8 @@ ul {
     }
 
     .openCloseBtn.dark {
-        display: flex;
         background: url('./open-right-dark.svg') no-repeat center center;
         background-size: cover;
-        width: 50px;
-        height: 20px;
-        cursor: pointer;
-        transition: .4s ease;
     }
 
     .openCloseBtn.clicked {
@@ -522,16 +503,13 @@ ul {
     }
 
     .openCloseBtn.clicked.dark {
-        display: flex;
         background: url('./close-left-dark.svg') no-repeat center center;
         background-size: cover;
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
     }
 
-    .btns.show, .filterSection.show, .contactHeader.show p {
+    .btns.show, .contactHeader.show p {
         display: flex;
+        transition: .4s ease;
     }
 
     .contactContainer.show {
@@ -555,5 +533,6 @@ ul {
 
     .filter {
         margin: 5px 0 0 0;
+        transition: .4s ease;
     }
 }

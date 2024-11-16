@@ -8,8 +8,6 @@ export function MessageContainer({ nomeChat, theme }) {
         doc.scrollTo(0, doc.scrollHeight)
       }, [ nomeChat ])
 
-      console.log(theme)
-
     const messages = [
         {
           de: "Diego",

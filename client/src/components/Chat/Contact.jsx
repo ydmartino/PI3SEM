@@ -4,7 +4,6 @@ function Contact({ contact, setNomeChat, nomeChat, theme }) {
 
     const handleOpenChat = () => {
         setNomeChat(contact)
-        console.log(contact)
     }
 
     return (

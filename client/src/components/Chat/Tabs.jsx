@@ -5,7 +5,6 @@ import { ThemeContext } from '../Context/ThemeContext'
 export function Tabs({ toggleRecent, activeTab, toggleTabs, leftBarStatus }) {
 
   const { theme, toggleTheme } = useContext(ThemeContext)
-  console.log(leftBarStatus)
 
   return (
     <div className={`tabs ${leftBarStatus == 'active' ? 'show' : ''}`}>

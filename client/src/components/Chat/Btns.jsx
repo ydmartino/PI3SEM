@@ -9,7 +9,6 @@ const { theme, toggleTheme } = useContext(ThemeContext)
   return (
     <div className={`btns ${leftBarStatus == 'active' ? 'show' : ''}`}>
         <div className={`modeBtn ${theme}`} onClick={toggleTheme}></div>
-        <div className={`searchIcon ${theme}`} onClick={handleFilter}></div>
     </div>
   )
 }
