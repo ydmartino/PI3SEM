@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
 
 function LoginForm({ logging }) {
 
+    const { theme, toggleTheme } = useContext(ThemeContext)
+    
     const navigate = useNavigate()
 
     const [ formData, setFormData ] = useState({
@@ -25,7 +29,7 @@ function LoginForm({ logging }) {
 
     return (
         <div className='formContainer' style={{display: !logging ? 'none' : ''}}>
-                    <form className="loginForm" onSubmit={handleSubmit}>
+                    <form className={`loginForm ${theme}`} onSubmit={handleSubmit}>
                         
                         <label htmlFor="username">Usuário:</label>
                             <input type="text" name="username" required/>

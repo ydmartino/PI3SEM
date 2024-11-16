@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Recent({ contact, setNomeChat, nomeChat }) {
+function Recent({ contact, setNomeChat, nomeChat, theme }) {
 
 const handleOpenChat = () => {
     setNomeChat(contact.nome)
 }
 
   return (
-    <div className="recentConvItem" onClick={handleOpenChat}>
+    <div className={`recentConvItem ${theme}`} onClick={handleOpenChat}>
         <div className="photo"></div>
         <div className="contactData">
             <div className="name">

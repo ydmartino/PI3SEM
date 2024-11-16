@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Contact from './Contact'
 import axios from 'axios'
+import { useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
 
-export function AllContactsContainer({ search, nomeChat, setNomeChat }) {
+export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab }) {
   
+  const { theme, toggleTheme } = useContext(ThemeContext)
+
   const [ contacts, setContacts ] = useState([])
 
   async function getContacts () {
@@ -16,11 +20,11 @@ export function AllContactsContainer({ search, nomeChat, setNomeChat }) {
   }, [])
 
   return (
-    <div className="contacts">
+    <div className={`contacts ${activeTab === 'all' ? 'show' : ''} ${theme}`}>
         {contacts
         .filter((contact) => contact.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
-            <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
+            <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} theme={theme} />
         ))
         }
     </div>

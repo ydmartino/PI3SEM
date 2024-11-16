@@ -26,10 +26,11 @@ body {
     border-right: 1px solid #c5c5c5;
     background-color: #ffffff;
     flex-wrap: wrap;
+    transition: .4s ease;
 }
 
 .contactSection.dark, .messageSection.dark {
-    background-color: #365B6D;
+    background-color: #1D4355;
 }
 
 .contactHeader {
@@ -159,7 +160,7 @@ body {
     width: 0%;
     transition: .4s ease;
     z-index: 0;
-    background-color: #365B6D;
+    background-color: #1D4355;
 }
 
 .recentConv.show, .contacts.show {
@@ -190,7 +191,7 @@ body {
     width: 100%;
     transition: .4s ease;
     z-index: 1;
-    background-color: #365B6D;
+    background-color: #1D4355;
 }
 
 .contactContainer.reduce {
@@ -228,6 +229,14 @@ body {
     transition: .4s;
 }
 
+.contact.dark > .contactData {
+    color: #efefef;
+}
+
+.recentConvItem.dark > .contactData {
+    color: #efefef;
+}
+
 .contact:hover {
     background-color: #efefef;
 }
@@ -254,10 +263,6 @@ body {
     padding: 0 20px 0 20px;
     transition: .4s ease;
     cursor: pointer;
-}
-
-.contactData.dark {
-    color: #efefef;
 }
 
 .contactData p {
@@ -363,7 +368,7 @@ ul {
 
 .own-message.dark {
     color: #efefef;
-    background-color: #1D4355;
+    background-color: #365B6D;
 }
 
 .own-message {
@@ -408,7 +413,7 @@ ul {
 }
 
 .messageHeader.dark, .inputDiv.dark, .messageInput.dark {
-    background-color: #71878F;
+    background-color: #365B6D;
     color: #efefef;
     border: 1px solid #efefef;
 }

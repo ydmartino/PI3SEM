@@ -32,6 +32,12 @@ h1 {
     display: flex;
 }
 
+.dark.transpArea {
+    background-image: url('./bg_darkmode.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .modeBtn {
     background-image: url('./moon.svg');
     background-repeat: no-repeat;
@@ -193,32 +199,21 @@ label {
     color: #F2F1EC;
 }
 
-.dark.transpArea {
-    background-image: url('./bg_darkmode.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
 .dark.loginContainer {
     background-color: #36596A;
     color: #F2F1EC;
 }
 
-.dark.loginBtn {
-    width: 150px;
-    height: 40px;
-    border-radius: 10px;
+.loginForm.dark > .loginBtn {
     border: none;
     background-color: #1D4355;
-    transition: .4s;
     color: #F2F1EC;
 }
 
-
-.dark.loginBtn:hover {
+.loginForm.dark > .loginBtn:hover {
     background-color: #192c35;
 }
 
-.dark.modeBtn {
+.modeBtn.dark {
     background-image: url('./sun.svg');
 }
