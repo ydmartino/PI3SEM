@@ -13,9 +13,6 @@ public class MessageHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//Delegate to DB the responsability to auto-increment ID number
     private int id;
    
-
-
-
     @Column(nullable = false)//Not Null
     private String message;
     @Column(nullable = false)
@@ -24,6 +21,8 @@ public class MessageHistory {
     private int fromId;
     @Column(nullable = false)
     private int toId;
+    @Column
+    private String messageText;
 
 
     public int getId() {

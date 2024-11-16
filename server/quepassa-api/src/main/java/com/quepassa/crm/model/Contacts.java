@@ -1,19 +1,30 @@
 package com.quepassa.crm.model;
 
 import java.time.Instant;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.descriptor.jdbc.VarbinaryJdbcType;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
-@Entity(name = "Contacts")
-public class Contacts {
+@Entity
+@Table(name="Contacts", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"id"}),
+})
+public class Contacts implements UserDetails{
 
     @Id //Identifies Primary Key in DB
     @GeneratedValue( strategy = GenerationType.UUID)
@@ -30,14 +41,17 @@ public class Contacts {
 
     @Column(nullable = false)
     private String email;
+    
+    @Column
+    private String pfpimage;
 
     @CreationTimestamp
     private Instant creationTimestamp;
     @UpdateTimestamp
     private Instant updateTimestamp;
 
-    //Constructors to framework to manage in runtime
 
+    //Constructors to framework to manage in runtime
     public Contacts(Instant creationTimestamp, String email, UUID id, boolean isAdmin, String name, String password, Instant updateTimestamp) {
         this.creationTimestamp = creationTimestamp;
         this.email = email;
@@ -164,6 +178,18 @@ public class Contacts {
         } else if (!updateTimestamp.equals(other.updateTimestamp))
             return false;
         return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        return new HashSet <GrantedAuthority>();
+    }
+
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 
        

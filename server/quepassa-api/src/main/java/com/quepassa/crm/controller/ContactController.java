@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quepassa.crm.model.Contacts;
 import com.quepassa.crm.service.ContactService;
+import com.quepassa.crm.service.CreateContactDTO;
 
 
 @RestController

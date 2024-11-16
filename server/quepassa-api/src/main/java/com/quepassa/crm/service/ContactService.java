@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.quepassa.crm.controller.CreateContactDTO;
 import com.quepassa.crm.model.Contacts;
 import com.quepassa.crm.repository.ContactsRepository;
 
@@ -36,5 +35,6 @@ public class ContactService {
         var contactSaved = contactsRepository.save(entity);
         return contactSaved.getId();
     }
+
 
 }
