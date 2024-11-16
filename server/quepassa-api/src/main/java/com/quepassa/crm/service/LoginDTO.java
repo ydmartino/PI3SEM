@@ -1,6 +1,8 @@
 package com.quepassa.crm.service;
 
+import lombok.Data;
 
+@Data
 public class LoginDTO {
 
     private String nameOrEmail;
