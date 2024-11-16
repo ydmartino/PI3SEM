@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
 
 function SignUpForm({ logging }) {
+
+    const { theme, toggleTheme } = useContext(ThemeContext)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -28,7 +32,7 @@ function SignUpForm({ logging }) {
 
     return (
         <div className='signupContainer' style={{display: logging ? 'none' : ''}}>
-                <form className="loginForm" onSubmit={handleSubmit}>
+                <form className={`loginForm ${theme}`} onSubmit={handleSubmit}>
                         
                     <label>Usuário:</label>
                         <input type="text" 

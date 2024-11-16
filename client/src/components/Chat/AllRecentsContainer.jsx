@@ -1,7 +1,11 @@
 import React from 'react'
 import Recent from './Recent'
+import { useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
 
-export function AllRecentsContainer({ search, setNomeChat, nomeChat }) {
+export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab }) {
+
+    const { theme, toggleTheme } = useContext(ThemeContext)
 
     const recents = [{
         'nome' : 'Marcelo',
@@ -41,11 +45,11 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat }) {
 ]
 
   return (
-    <div className="recentConv show">
+    <div className={`recentConv ${activeTab === 'recents' ? 'show' : ''} ${theme}`}>
         {recents
         .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
-            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} />
+            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} theme={theme} />
         ))}
     </div>
   )

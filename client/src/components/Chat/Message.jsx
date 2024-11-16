@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Message({ nomeChat, de, msg, time }) {
+export function Message({ nomeChat, de, msg, time, theme }) {
 
     const classtype = (nomeChat == de ? "other-message" : "own-message")
 
@@ -8,7 +8,7 @@ export function Message({ nomeChat, de, msg, time }) {
     const hours = new Date(convertedTime).toLocaleTimeString()
 
     return (
-        <li className={classtype}>
+        <li className={`${classtype} ${theme}`}>
             <div className="nomeMsg">{de}</div>
             <div className="msgInfo">
                 <div className="msg">{msg}</div>

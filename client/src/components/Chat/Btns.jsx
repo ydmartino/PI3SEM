@@ -1,10 +1,14 @@
 import React from 'react'
+import { useContext } from 'react'
+import { ThemeContext } from '../Context/ThemeContext'
 
-export function Btns({ toggleMode, handleFilter }) {
+export function Btns({ handleFilter, leftBarStatus }) {
+  
+const { theme, toggleTheme } = useContext(ThemeContext)
+
   return (
-    <div className="btns">
-        <div className="modeBtn" onClick={toggleMode}></div>
-        <div className="searchIcon" onClick={handleFilter}></div>
+    <div className={`btns ${leftBarStatus == 'active' ? 'show' : ''}`}>
+        <div className={`modeBtn ${theme}`} onClick={toggleTheme}></div>
     </div>
   )
 }
