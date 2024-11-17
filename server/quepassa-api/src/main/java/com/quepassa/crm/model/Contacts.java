@@ -57,8 +57,12 @@ public class Contacts implements UserDetails{
 
 
     //Constructors to framework to manage in runtime
+    
+    public Contacts(){
+
+    }
+
     public Contacts(Instant creationTimestamp, String email, UUID id, boolean isAdmin, String name, String password, Instant updateTimestamp) {
-        authorities.add (new SimpleGrantedAuthority("USER"));
         this.creationTimestamp = creationTimestamp;
         this.email = email;
         this.id = id;
@@ -130,11 +134,13 @@ public class Contacts implements UserDetails{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((authorities == null) ? 0 : authorities.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + (isAdmin ? 1231 : 1237);
         result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((pfpimage == null) ? 0 : pfpimage.hashCode());
         result = prime * result + ((creationTimestamp == null) ? 0 : creationTimestamp.hashCode());
         result = prime * result + ((updateTimestamp == null) ? 0 : updateTimestamp.hashCode());
         return result;
@@ -151,6 +157,11 @@ public class Contacts implements UserDetails{
         if (getClass() != obj.getClass())
             return false;
         Contacts other = (Contacts) obj;
+        if (authorities == null) {
+            if (other.authorities != null)
+                return false;
+        } else if (!authorities.equals(other.authorities))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -173,6 +184,11 @@ public class Contacts implements UserDetails{
                 return false;
         } else if (!email.equals(other.email))
             return false;
+        if (pfpimage == null) {
+            if (other.pfpimage != null)
+                return false;
+        } else if (!pfpimage.equals(other.pfpimage))
+            return false;
         if (creationTimestamp == null) {
             if (other.creationTimestamp != null)
                 return false;
@@ -187,7 +203,7 @@ public class Contacts implements UserDetails{
     }
 
     public Collection<GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
+        //Retorna "authorities" padrão para o Spring Security
         return authorities;
     }
 

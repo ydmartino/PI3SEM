@@ -74,6 +74,13 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
+		<dependency>
+  			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -93,4 +100,5 @@
 		</plugins>
 	</build>
 
-	</project>
+
+</project>

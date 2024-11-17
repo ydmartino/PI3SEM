@@ -7,7 +7,8 @@ function SignUpForm({ logging }) {
         username: '',
         email: '',
         password: '',
-        confPassword: ''
+        confPassword: '',
+        isAdmin: false
     })
 
     const handleChange = (e) => {
@@ -16,13 +17,16 @@ function SignUpForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:8080/Contacts', setFormData)
+        const response = await axios.post('http://localhost:8080/Contacts/', formData,{
+            
+        })
         alert(response.data)
         setFormData({
             username: '',
             email: '',
             password: '',
-            confPassword: ''
+            confPassword: '',
+            isAdmin: false
         })
     }
 
