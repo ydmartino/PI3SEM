@@ -4,7 +4,7 @@ import axios from 'axios'
 function SignUpForm({ logging }) {
 
     const [formData, setFormData] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
         confPassword: '',
@@ -17,12 +17,10 @@ function SignUpForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:8080/Contacts/', formData,{
-            
-        })
+        const response = await axios.post('http://localhost:8080/Contacts', formData)
         alert(response.data)
         setFormData({
-            username: '',
+            name: '',
             email: '',
             password: '',
             confPassword: '',
@@ -36,8 +34,8 @@ function SignUpForm({ logging }) {
                         
                     <label>Usuário:</label>
                         <input type="text" 
-                        name='username'
-                        value={formData.username}
+                        name='name'
+                        value={formData.name}
                         onChange={handleChange}/>
 
                     <label>E-mail:</label>

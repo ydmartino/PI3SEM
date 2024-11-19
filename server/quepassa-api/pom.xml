@@ -14,7 +14,7 @@
 	<name>quepassa-api1.0</name>
 	<description>API do sistema QuePassa</description>
 	<url/>
-	<licenses>
+	<licenses> 
 		<license/>
 	</licenses>
 	<developers>
@@ -64,10 +64,6 @@
 			<groupId>org.apache.httpcomponents.client5</groupId>
 			<artifactId>httpclient5</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

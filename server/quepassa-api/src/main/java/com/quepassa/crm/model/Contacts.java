@@ -1,16 +1,10 @@
 package com.quepassa.crm.model;
 
 import java.time.Instant;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,9 +21,7 @@ import lombok.Data;
     @UniqueConstraint(columnNames = {"id"}),
     @UniqueConstraint(columnNames = {"email"})
 })
-public class Contacts implements UserDetails{
-
-    private final Set<GrantedAuthority> authorities = new HashSet<>();
+public class Contacts{
 
     @Id //Identifies Primary Key in DB
     @GeneratedValue( strategy = GenerationType.UUID)
@@ -134,7 +126,6 @@ public class Contacts implements UserDetails{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((authorities == null) ? 0 : authorities.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -157,11 +148,6 @@ public class Contacts implements UserDetails{
         if (getClass() != obj.getClass())
             return false;
         Contacts other = (Contacts) obj;
-        if (authorities == null) {
-            if (other.authorities != null)
-                return false;
-        } else if (!authorities.equals(other.authorities))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -200,11 +186,6 @@ public class Contacts implements UserDetails{
         } else if (!updateTimestamp.equals(other.updateTimestamp))
             return false;
         return true;
-    }
-
-    public Collection<GrantedAuthority> getAuthorities() {
-        //Retorna "authorities" padrão para o Spring Security
-        return authorities;
     }
 
     public String getUsername() {
