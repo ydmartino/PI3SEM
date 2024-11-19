@@ -1,5 +1,7 @@
 package com.quepassa.crm.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,25 +17,27 @@ import com.quepassa.crm.model.Contacts;
 import com.quepassa.crm.service.ContactService;
 import com.quepassa.crm.service.CreateContactDTO;
 
-
 @RestController
 @RequestMapping("/Contacts")
 public class ContactController {
-    
 
     private ContactService contactService;
 
+    @Autowired
+    public ContactController (ContactService contactService){
+        this.contactService = contactService;
+    }
 
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = {"Content-Type", "Authorization"}, exposedHeaders = "Authorization", maxAge = 3600)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Contacts> add(@RequestBody CreateContactDTO createContactDTO){
+        HttpHeaders headers = new HttpHeaders();
         contactService.createContact(createContactDTO);
-        return null;
-
+        return ResponseEntity.ok().headers(headers).body(null);
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping
+    @GetMapping("/{contactName}")
     public ResponseEntity<Contacts> getContactName(@PathVariable("contactName") String name) {
         
         return null;

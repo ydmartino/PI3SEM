@@ -1,40 +1,31 @@
 package com.quepassa.crm;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.context.annotation.Configuration;
 
-public class SecurityConfig {
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-    private UserDetailsService userDetailsService;
+@Configuration
+public class SecurityConfig implements WebMvcConfigurer {
 
-    public SecurityConfig(UserDetailsService userDetailsService){
-        this.userDetailsService = userDetailsService;
-    }
+	@Bean
+	public WebMvcConfigurer corsConfigurer(){
+		return new WebMvcConfigurer(){
+			@Override
+			public void addCorsMappings(CorsRegistry registry){
 
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+				registry.addMapping("/**")
+				.allowedOrigins("http://localhost:5173")
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
+				.allowedHeaders("*") // Permite todos os cabeçalhos
+				.exposedHeaders("Authorization") // Expõe cabeçalhos necessários
+				.allowCredentials(true) // Permite cookies ou credenciais
+				.maxAge(3600); // Tempo de cache da configuração
+			}
 
-    @Bean
-    public AuthenticationManager authenticationManager(
-        AuthenticationConfiguration configuration) throws Exception{
-            return configuration.getAuthenticationManager();
-        }
-    @SuppressWarnings("deprecation")
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf(csrf -> csrf.disable()).authorizeRequests((authorize) -> 
-            authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                .requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated());
-        return http.build();
-                    
-    }
+		};
+
+	}
 }

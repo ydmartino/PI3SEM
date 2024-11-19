@@ -14,7 +14,7 @@
 	<name>quepassa-api1.0</name>
 	<description>API do sistema QuePassa</description>
 	<url/>
-	<licenses>
+	<licenses> 
 		<license/>
 	</licenses>
 	<developers>
@@ -66,9 +66,17 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
+
+		<dependency>
+  			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -76,7 +84,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
+					</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+
 </project>
