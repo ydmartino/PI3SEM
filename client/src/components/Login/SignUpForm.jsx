@@ -22,14 +22,20 @@ function SignUpForm({ logging }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const response = await axios.post('http://localhost:8080/Contacts', formData)
-        alert(response.data)
-        setFormData({
-            name: '',
-            email: '',
-            password: '',
-            confPassword: '',
-            isAdmin: false
-        })
+        console.log(response)
+        if(response.status == 200){
+            alert(response.status + ": Criado com sucesso")
+            setFormData({
+                name: '',
+                email: '',
+                password: '',
+                confPassword: '',
+                isAdmin: false
+            })
+        }
+        else {
+            alert("Erro inesperado. Código: " + response.status)
+        }
     }
 
     return (

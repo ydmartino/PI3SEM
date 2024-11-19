@@ -11,7 +11,7 @@ function LoginForm({ logging }) {
     const navigate = useNavigate()
 
     const [ formData, setFormData ] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
         confPassword: ''
@@ -23,7 +23,7 @@ function LoginForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //await axios.post('http://localhost:8080/Login', formData)
+        const response = await axios.post(`http://localhost:8080/Contacts/Login/${formData.name}`, formData)
         return navigate('/chat')
     }
 
@@ -31,8 +31,8 @@ function LoginForm({ logging }) {
         <div className='formContainer' style={{display: !logging ? 'none' : ''}}>
                     <form className={`loginForm ${theme}`} onSubmit={handleSubmit}>
                         
-                        <label htmlFor="username">Usuário:</label>
-                            <input type="text" name="username" required/>
+                        <label htmlFor="name">Usuário:</label>
+                            <input type="text" name="name" required/>
 
                         <label htmlFor="password">Senha:</label>
                             <input type="password" name="password" required/>
