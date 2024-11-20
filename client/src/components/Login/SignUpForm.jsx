@@ -23,7 +23,7 @@ function SignUpForm({ logging }) {
         e.preventDefault()
         const response = await axios.post('http://localhost:8080/Contacts', formData)
         console.log(response)
-        if(response.status == 200){
+        if(response.status == 201){
             alert(response.status + ": Criado com sucesso")
             setFormData({
                 name: '',
@@ -34,7 +34,7 @@ function SignUpForm({ logging }) {
             })
         }
         else {
-            alert("Erro inesperado. Código: " + response.status)
+            alert("Erro inesperado: " + response.status)
         }
     }
 

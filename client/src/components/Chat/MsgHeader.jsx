@@ -5,7 +5,7 @@ export function MsgHeader({ nomeChat, theme }) {
     <div className={`messageHeader ${theme}`}>
         <div className="photoMiniature"></div>
         <div className="headerData">
-            <p className='nameHeader'>{nomeChat}</p>
+            <p className='nameHeader'>{nomeChat.name}</p>
             <p className='statusHeader'>On-line</p>
         </div>
     </div>

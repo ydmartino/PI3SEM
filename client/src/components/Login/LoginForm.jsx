@@ -12,9 +12,7 @@ function LoginForm({ logging }) {
 
     const [ formData, setFormData ] = useState({
         name: '',
-        email: '',
-        password: '',
-        confPassword: ''
+        password: ''
     })
 
     const handleChange = (e) => {
@@ -23,8 +21,17 @@ function LoginForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post(`http://localhost:8080/Contacts/Login/${formData.name}`, formData)
-        return navigate('/chat')
+        const response = await axios.post(`http://localhost:8080/Contacts/Login`, formData)
+        console.log(response)
+        if(response.status == 200){
+            localStorage.setItem('userId', response.data.userId)
+            console.log(localStorage.getItem('userId'))
+            alert(response.data.message)
+            return navigate('/chat')
+        }
+        else {
+            alert(response.data.message)
+        }
     }
 
     return (
@@ -32,10 +39,18 @@ function LoginForm({ logging }) {
                     <form className={`loginForm ${theme}`} onSubmit={handleSubmit}>
                         
                         <label htmlFor="name">Usuário:</label>
-                            <input type="text" name="name" required/>
+                            <input type="text" 
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required/>
 
                         <label htmlFor="password">Senha:</label>
-                            <input type="password" name="password" required/>
+                            <input type="password" 
+                            name="password" 
+                            value={formData.password}
+                            onChange={handleChange}
+                            required/>
 
                         <div className="rememberMe">
                             <label className='rememberMeTxt'>Lembrar-me:</label>

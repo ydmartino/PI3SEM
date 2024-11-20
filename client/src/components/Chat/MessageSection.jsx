@@ -13,7 +13,7 @@ export function MessageSection({ nomeChat, leftBarStatus }) {
     <div className={`messageSection ${theme} ${leftBarStatus == 'active' ? 'reduce' : ''}`}>
         <MsgHeader nomeChat={nomeChat} theme={theme} />
         <MsgContainer nomeChat={nomeChat} theme={theme} />
-        <MsgInput theme={theme} />
+        <MsgInput theme={theme} nomeChat={nomeChat} />
     </div>
   )
 }

@@ -209,6 +209,11 @@ body {
     transition: .4s;
 }
 
+.contact.active {
+    background-color: transparent;
+}
+
+
 .recentConvItem.dark > .contactData {
     color: #efefef;
 }
