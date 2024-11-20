@@ -32,7 +32,7 @@ public class MessageHistoryController {
     }
 
     @GetMapping("/MessageHistory/User/{userId}")
-    public List<MessageHistory> getAllMessagesForUser(@PathVariable int userId){
+    public List<MessageHistory> getAllMessagesForUser(@PathVariable String userId){
         return messageHistoryService.getAllMessagesForUser(userId);
     }
 }

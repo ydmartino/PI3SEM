@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MessageHistoryRepository extends JpaRepository<MessageHistory, Integer>{
 
-    List<MessageHistory> findByFromId(int fromId);
-    List<MessageHistory> findByToId(int fromId);
+    List<MessageHistory> findByFromId(String fromId);
+    List<MessageHistory> findByToId(String fromId);
 }

@@ -26,7 +26,7 @@ public class MessageHistoryService {
     }
 
 
-    public List<MessageHistory> getAllMessagesForUser(int userId){
+    public List<MessageHistory> getAllMessagesForUser(String userId){
         //Mensagens enviadas e recebidas
         List<MessageHistory> sentMessages = messageHistoryRepository.findByFromId(userId);
         List<MessageHistory> receivedMessages = messageHistoryRepository.findByToId(userId);

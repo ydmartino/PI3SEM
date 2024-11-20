@@ -52,13 +52,6 @@ public class ContactController {
         }
     }
 
-    @PostMapping("/Login/{contactName}")
-    public ResponseEntity<Contacts> getContactName(@PathVariable("contactName") String name) {
-        
-        return null;
-
-	}
-
     @GetMapping("/All")
     public List<Contacts> getAllContacts() {
         return contactService.getAllContacts();

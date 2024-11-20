@@ -18,11 +18,11 @@ public class MessageHistory {
     @Column(nullable = false)
     private String dateTime;
     @Column(nullable = false)
-    private int fromId;
+    private String fromId;
     @Column(nullable = false)
-    private int toId;
+    private String toId;
     @Column
-    private String messageText;
+    private String messageImage;
 
 
     public int getId() {
@@ -49,19 +49,19 @@ public class MessageHistory {
         this.dateTime = dateTime;
     }
 
-    public int getFromId() {
+    public String getFromId() {
         return this.fromId;
     }
 
-    public void setFromId(int fromId) {
+    public void setFromId(String fromId) {
         this.fromId = fromId;
     }
 
-    public int getToId() {
+    public String getToId() {
         return this.toId;
     }
 
-    public void setToId(int toId) {
+    public void setToId(String toId) {
         this.toId = toId;
     }
 
@@ -70,6 +70,11 @@ public class MessageHistory {
         final int prime = 31;
         int result = 1;
         result = prime * result + id;
+        result = prime * result + ((message == null) ? 0 : message.hashCode());
+        result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
+        result = prime * result + ((fromId == null) ? 0 : fromId.hashCode());
+        result = prime * result + ((toId == null) ? 0 : toId.hashCode());
+        result = prime * result + ((messageImage == null) ? 0 : messageImage.hashCode());
         return result;
     }
 
@@ -83,6 +88,31 @@ public class MessageHistory {
             return false;
         MessageHistory other = (MessageHistory) obj;
         if (id != other.id)
+            return false;
+        if (message == null) {
+            if (other.message != null)
+                return false;
+        } else if (!message.equals(other.message))
+            return false;
+        if (dateTime == null) {
+            if (other.dateTime != null)
+                return false;
+        } else if (!dateTime.equals(other.dateTime))
+            return false;
+        if (fromId == null) {
+            if (other.fromId != null)
+                return false;
+        } else if (!fromId.equals(other.fromId))
+            return false;
+        if (toId == null) {
+            if (other.toId != null)
+                return false;
+        } else if (!toId.equals(other.toId))
+            return false;
+        if (messageImage == null) {
+            if (other.messageImage != null)
+                return false;
+        } else if (!messageImage.equals(other.messageImage))
             return false;
         return true;
     }
