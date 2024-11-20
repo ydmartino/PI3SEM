@@ -1,5 +1,9 @@
 package com.quepassa.crm.model;
 
+import java.time.Instant;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +20,8 @@ public class MessageHistory {
     @Column(nullable = false)//Not Null
     private String message;
     @Column(nullable = false)
-    private String dateTime;
+    @CreationTimestamp
+    private Instant dateTime;
     @Column(nullable = false)
     private String fromId;
     @Column(nullable = false)
@@ -41,12 +46,12 @@ public class MessageHistory {
         this.message = message;
     }
 
-    public String getDateTime() {
+    public Instant getDateTime() {
         return this.dateTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(Instant dateTime) {
+        this.dateTime = Instant.now();
     }
 
     public String getFromId() {

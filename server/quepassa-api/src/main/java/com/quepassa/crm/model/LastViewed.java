@@ -3,6 +3,8 @@ package com.quepassa.crm.model;
 import java.io.Serializable;
 import java.time.Instant;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,8 +19,9 @@ public class LastViewed implements Serializable{
     private String fromIdUser;
     @Id //The other Primary Key
     @Column(nullable = false)
-    private Instant toIdUser;
+    private String toIdUser;
     @Column(nullable = false)
+    @UpdateTimestamp
     private Instant dateTime;
 
     public String getFromIdUser() {
@@ -29,11 +32,11 @@ public class LastViewed implements Serializable{
         this.fromIdUser = fromIdUser;
     }
 
-    public Instant getToIdUser() {
+    public String getToIdUser() {
         return this.toIdUser;
     }
 
-    public void setToIdUser(Instant toIdUser) {
+    public void setToIdUser(String toIdUser) {
         this.toIdUser = toIdUser;
     }
 
@@ -42,7 +45,7 @@ public class LastViewed implements Serializable{
     }
 
     public void setDateTime(Instant dateTime) {
-        this.dateTime = dateTime;
+        this.dateTime = Instant.now();
     }
 
     //Hashcode and Equals
