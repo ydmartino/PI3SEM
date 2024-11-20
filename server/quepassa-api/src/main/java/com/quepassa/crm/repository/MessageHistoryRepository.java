@@ -12,4 +12,6 @@ public interface MessageHistoryRepository extends JpaRepository<MessageHistory, 
 
     List<MessageHistory> findByFromId(String fromId);
     List<MessageHistory> findByToId(String fromId);
+    List<MessageHistory> findByFromIdAndToId(int fromId, int toId);
+
 }

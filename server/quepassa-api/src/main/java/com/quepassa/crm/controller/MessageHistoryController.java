@@ -35,4 +35,14 @@ public class MessageHistoryController {
     public List<MessageHistory> getAllMessagesForUser(@PathVariable String userId){
         return messageHistoryService.getAllMessagesForUser(userId);
     }
+    
+    @GetMapping("/Conversation/{userId1}/{userId2}")
+    public ResponseEntity<List<MessageHistory>> getMessagesBetweenUsers(
+        @PathVariable int userId1, 
+        @PathVariable int userId2) {
+        
+        List<MessageHistory> messages = messageHistoryService.getMessagesBetweenUsers(userId1, userId2);
+        return ResponseEntity.ok(messages);
+    }
+    
 }

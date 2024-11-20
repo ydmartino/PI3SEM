@@ -37,4 +37,17 @@ public class MessageHistoryService {
 
     }
 
+    public List<MessageHistory> getMessagesBetweenUsers(int userId1, int userId2) {
+        // Busca mensagens enviadas de userId1 para userId2
+        List<MessageHistory> sentMessages = messageHistoryRepository.findByFromIdAndToId(userId1, userId2);
+        // Busca mensagens recebidas por userId1 de userId2
+        List<MessageHistory> receivedMessages = messageHistoryRepository.findByFromIdAndToId(userId2, userId1);
+    
+        // Combina e ordena as mensagens por data/hora
+        return Stream.concat(sentMessages.stream(), receivedMessages.stream())
+                     .sorted(Comparator.comparing(MessageHistory::getDateTime))
+                     .toList();
+    }
+    
+
 }
