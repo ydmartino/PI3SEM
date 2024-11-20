@@ -1,6 +1,7 @@
 package com.quepassa.crm.model;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -188,6 +189,7 @@ public class Contacts{
             return false;
         return true;
     }
+
 
     public String getUsername() {
         return name;

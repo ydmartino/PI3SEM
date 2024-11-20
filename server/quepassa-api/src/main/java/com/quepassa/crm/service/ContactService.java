@@ -1,6 +1,7 @@
 package com.quepassa.crm.service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class ContactService {
 
     }
     
+    public List<Contacts> getAllContacts(){
+
+        return contactsRepository.findAll();
+
+    }
 
 }
