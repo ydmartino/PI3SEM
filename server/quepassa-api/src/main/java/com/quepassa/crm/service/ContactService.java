@@ -36,7 +36,13 @@ public class ContactService {
         return contactSaved.getId();
     }
 
-    
+    public boolean validateLogin(LoginDTO loginDTO){
+        
+        return contactsRepository.findByName(loginDTO.name())
+            .map(contact -> contact.getPassword().equals(loginDTO.password()))
+            .orElse(false);
+
+    }
     
 
 }

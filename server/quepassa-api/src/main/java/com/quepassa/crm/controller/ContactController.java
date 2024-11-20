@@ -1,11 +1,12 @@
 package com.quepassa.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.quepassa.crm.model.Contacts;
 import com.quepassa.crm.service.ContactService;
 import com.quepassa.crm.service.CreateContactDTO;
+import com.quepassa.crm.service.LoginDTO;
 
 @RestController
 @RequestMapping("/Contacts")
 public class ContactController {
 
+    @Autowired
     private ContactService contactService;
 
     @Autowired
@@ -34,10 +37,21 @@ public class ContactController {
     public ResponseEntity<Contacts> add(@RequestBody CreateContactDTO createContactDTO){
         HttpHeaders headers = new HttpHeaders();
         contactService.createContact(createContactDTO);
-        return ResponseEntity.ok().headers(headers).body(null);
+
+        return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(null);
     }
 
-    @GetMapping("/{contactName}")
+    @PostMapping("/Login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
+        boolean isValid = contactService.validateLogin(loginDTO);
+        if (isValid){
+            return ResponseEntity.ok("login successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
+    @PostMapping("/Login/{contactName}")
     public ResponseEntity<Contacts> getContactName(@PathVariable("contactName") String name) {
         
         return null;
