@@ -2,6 +2,7 @@ package com.quepassa.crm.service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -37,11 +38,14 @@ public class ContactService {
         return contactSaved.getId();
     }
 
-    public boolean validateLogin(LoginDTO loginDTO){
+    public String validateLogin(LoginDTO loginDTO){
         
-        return contactsRepository.findByName(loginDTO.name())
-            .map(contact -> contact.getPassword().equals(loginDTO.password()))
-            .orElse(false);
+        Optional<Contacts> contactOpt = contactsRepository.findByName(loginDTO.name());
+        if (contactOpt.isPresent() && contactOpt.get().getPassword().equals(loginDTO.password())) {
+            return contactOpt.get().getId().toString(); // Retorna o ID do usuário como String
+        }
+        return null; // Retorna null se as credenciais forem inválidas
+
 
     }
     

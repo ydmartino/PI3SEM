@@ -43,12 +43,31 @@ public class ContactController {
     }
 
     @PostMapping("/Login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
-        boolean isValid = contactService.validateLogin(loginDTO);
-        if (isValid){
-            return ResponseEntity.ok("login successful");
+    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO){
+        String userId = contactService.validateLogin(loginDTO);
+        if (userId != null){
+            LoginResponse response = new LoginResponse("login successful", userId);
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+    }
+
+    public static class LoginResponse {
+        private String message;
+        private String userId;
+    
+        public LoginResponse(String message, String userId) {
+            this.message = message;
+            this.userId = userId;
+        }
+    
+        public String getMessage() {
+            return message;
+        }
+    
+        public String getUserId() {
+            return userId;
         }
     }
 

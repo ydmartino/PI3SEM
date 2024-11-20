@@ -1,6 +1,7 @@
 package com.quepassa.crm.model;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,9 +17,9 @@ public class LastViewed implements Serializable{
     private String fromIdUser;
     @Id //The other Primary Key
     @Column(nullable = false)
-    private String toIdUser;
+    private Instant toIdUser;
     @Column(nullable = false)
-    private String dateTime;
+    private Instant dateTime;
 
     public String getFromIdUser() {
         return this.fromIdUser;
@@ -28,19 +29,19 @@ public class LastViewed implements Serializable{
         this.fromIdUser = fromIdUser;
     }
 
-    public String getToIdUser() {
+    public Instant getToIdUser() {
         return this.toIdUser;
     }
 
-    public void setToIdUser(String toIdUser) {
+    public void setToIdUser(Instant toIdUser) {
         this.toIdUser = toIdUser;
     }
 
-    public String getDateTime() {
+    public Instant getDateTime() {
         return this.dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Instant dateTime) {
         this.dateTime = dateTime;
     }
 
