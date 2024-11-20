@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quepassa.crm.model.MessageHistory;
-import com.quepassa.crm.repository.MessageHistoryRepository;
 import com.quepassa.crm.service.MessageHistoryService;
 
 
@@ -25,8 +24,6 @@ public class MessageHistoryController {
     public MessageHistoryController(MessageHistoryService messageHistoryService){
         this.messageHistoryService = messageHistoryService;
     }
-
-    private MessageHistoryRepository messageHistoryRepository;
 
     @PostMapping
     public ResponseEntity<MessageHistory> saveMessage(@RequestBody MessageHistory messageHistory) {
