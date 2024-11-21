@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export function MsgInput({ theme, nomeChat }) {
+export function MsgInput({ theme, nomeChat, fetchMsg }) {
   const [formData, setFormData] = useState({
     message: '',
     fromId: '',
@@ -22,23 +22,20 @@ export function MsgInput({ theme, nomeChat }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Consolidar todas as atualizações do estado em uma única chamada
     const updatedFormData = {
       ...formData,
       fromId: localStorage.getItem('userId'),
       toId: nomeChat.id
     };
 
-    console.log(formData)
-
     try {
       await axios.post('http://localhost:8080/MessageHistory', updatedFormData);
-      // Limpar o estado após enviar
       setFormData({
         message: '',
         fromId: '',
         toId: ''
       });
+      fetchMsg()
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
     }

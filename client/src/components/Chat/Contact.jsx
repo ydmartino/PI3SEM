@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Contact({ contact, setNomeChat, nomeChat, theme }) {
+function Contact({ contact, setNomeChat, nomeChat, toggleLeftBar, theme }) {
 
     const handleOpenChat = () => {
         setNomeChat(contact);
-        console.log(nomeChat)
+        toggleLeftBar();
     };
 
     return (
@@ -15,7 +15,7 @@ function Contact({ contact, setNomeChat, nomeChat, theme }) {
             <div className="photo"></div>
             <div className="contactData">
                 <div className="name">
-                    <p>{contact.name}</p>
+                    <p>{contact.id == localStorage.getItem('userId') ? contact.name + " (Você)" : contact.name}</p>
                 </div>
             </div>
         </div>

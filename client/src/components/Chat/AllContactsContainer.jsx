@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
 
-export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab }) {
+export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab, toggleLeftBar }) {
   
   const { theme, toggleTheme } = useContext(ThemeContext)
 
@@ -24,7 +24,7 @@ export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab 
         {contacts
         .filter((contact) => contact.name.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
-            <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} theme={theme} />
+            <Contact contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} toggleLeftBar={toggleLeftBar} theme={theme} />
         ))
         }
     </div>

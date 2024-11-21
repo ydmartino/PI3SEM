@@ -37,7 +37,7 @@ public class MessageHistoryService {
 
     }
 
-    public List<MessageHistory> getMessagesBetweenUsers(int userId1, int userId2) {
+    public List<MessageHistory> getMessagesBetweenUsers(String userId1, String userId2) {
         // Busca mensagens enviadas de userId1 para userId2
         List<MessageHistory> sentMessages = messageHistoryRepository.findByFromIdAndToId(userId1, userId2);
         // Busca mensagens recebidas por userId1 de userId2

@@ -38,8 +38,8 @@ public class MessageHistoryController {
     
     @GetMapping("/Conversation/{userId1}/{userId2}")
     public ResponseEntity<List<MessageHistory>> getMessagesBetweenUsers(
-        @PathVariable int userId1, 
-        @PathVariable int userId2) {
+        @PathVariable String userId1, 
+        @PathVariable String userId2) {
         
         List<MessageHistory> messages = messageHistoryService.getMessagesBetweenUsers(userId1, userId2);
         return ResponseEntity.ok(messages);

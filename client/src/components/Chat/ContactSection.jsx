@@ -25,7 +25,8 @@ function ContactSection({ leftBarStatus, toggleLeftBar , setSearch,
         <Filter setSearch={setSearch} theme={theme} filterStatus={filterStatus} leftBarStatus={leftBarStatus} />
 
         <ContactContainer search={search} setNomeChat={setNomeChat} nomeChat={nomeChat} 
-        activeTab={activeTab} filterStatus={filterStatus} leftBarStatus={leftBarStatus} />
+        activeTab={activeTab} filterStatus={filterStatus} leftBarStatus={leftBarStatus}
+        toggleLeftBar={toggleLeftBar} />
     </div>
   )
 }

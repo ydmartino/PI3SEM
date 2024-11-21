@@ -3,7 +3,7 @@ import Recent from './Recent'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
 
-export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab }) {
+export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, toggleLeftBar }) {
 
     const { theme, toggleTheme } = useContext(ThemeContext)
 
@@ -49,7 +49,7 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab }
         {recents
         .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
-            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} theme={theme} />
+            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} toggleLeftBar={toggleLeftBar} theme={theme} />
         ))}
     </div>
   )

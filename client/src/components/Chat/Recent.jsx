@@ -1,9 +1,10 @@
 import React from 'react'
 
-function Recent({ contact, setNomeChat, nomeChat, theme }) {
+function Recent({ contact, setNomeChat, nomeChat, toggleLeftBar, theme }) {
 
 const handleOpenChat = () => {
     setNomeChat(contact.nome)
+    toggleLeftBar();
 }
 
   return (

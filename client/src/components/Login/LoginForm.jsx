@@ -25,7 +25,6 @@ function LoginForm({ logging }) {
         console.log(response)
         if(response.status == 200){
             localStorage.setItem('userId', response.data.userId)
-            console.log(localStorage.getItem('userId'))
             alert(response.data.message)
             return navigate('/chat')
         }
