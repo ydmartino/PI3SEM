@@ -400,6 +400,16 @@ ul {
     transition: .4s ease;
 }
 
+.counter {
+    display: block;
+    color: #242424;
+    margin-left: 0;
+}
+
+.counter.dark {
+    color: #efefef;
+}
+
 .messageHeader.dark, .inputDiv.dark, .messageInput.dark {
     background-color: #365B6D;
     color: #efefef;
@@ -411,6 +421,7 @@ ul {
     display: inherit;
     margin-left: 20px;
     margin-top: 10px;
+    margin-right: 0;
     border: 1px solid #242424;
     transition: .4s ease;
 }

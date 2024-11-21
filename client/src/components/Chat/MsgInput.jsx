@@ -47,10 +47,13 @@ export function MsgInput({ theme, nomeChat, fetchMsg }) {
         type="text"
         name="message"
         className={`messageInput ${theme}`}
-        placeholder="Digite sua mensagem..."
+        placeholder="Sua mensagem (Max: 255 carácteres)"
         value={formData.message}
         onChange={handleChange}
+        autoComplete='none'
+        maxLength={255}
       />
+      <p className={`counter ${theme}`}>{formData.message.length}</p>
       <button type="submit" className={`sendBtn ${theme}`}></button>
     </form>
   );
