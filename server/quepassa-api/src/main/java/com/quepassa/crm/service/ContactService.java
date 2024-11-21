@@ -38,14 +38,22 @@ public class ContactService {
         return contactSaved.getId();
     }
 
+    public String getUserIdByUsername(String username) {
+        return contactsRepository.findByName(username)
+            .map(contact -> String.valueOf(contact.getId())) // Obtém o ID do usuário
+            .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + username));
+    }
+
+
+
     public String validateLogin(LoginDTO loginDTO){
         
         Optional<Contacts> contactOpt = contactsRepository.findByName(loginDTO.name());
         if (contactOpt.isPresent() && contactOpt.get().getPassword().equals(loginDTO.password())) {
-            return contactOpt.get().getId().toString(); // Retorna o ID do usuário como String
+            return contactOpt.get().getId().toString(); // Retorna o ID
         }
-        return null; // Retorna null se as credenciais forem inválidas
-
+        else return null; // Retorna null se as credenciais forem inválidas
+        
 
     }
     
