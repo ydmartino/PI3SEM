@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quepassa.crm.model.MessageHistory;
 import com.quepassa.crm.service.ContactService;
+import com.quepassa.crm.service.MessageHistoryService;
 
 @RestController
 public class ChatController {
@@ -17,6 +18,8 @@ public class ChatController {
     private ContactService contactService;
 
     private SimpMessagingTemplate template;
+
+    private MessageHistoryService messageHistoryService;
 
     
     public ChatController(SimpMessagingTemplate template){
@@ -38,6 +41,8 @@ public class ChatController {
         if (!message.getFromId().equals(authenticatedUserId)) {
             throw new IllegalArgumentException("Usuário não autorizado a enviar mensagens com este ID.");
         }
+
+        messageHistoryService.saveMessage(message);
     
         // Enviar mensagem ao destinatário
         String toUserDestination = "/queue/messages/" + message.getToId();
