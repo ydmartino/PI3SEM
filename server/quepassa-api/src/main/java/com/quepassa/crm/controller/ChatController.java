@@ -19,11 +19,12 @@ public class ChatController {
 
     private SimpMessagingTemplate template;
 
-    private MessageHistoryService messageHistoryService;
+    private final MessageHistoryService messageHistoryService;
 
     
-    public ChatController(SimpMessagingTemplate template){
+    public ChatController(SimpMessagingTemplate template, MessageHistoryService messageHistoryService){
         this.template = template;
+        this.messageHistoryService = messageHistoryService;
     }
 
     @MessageMapping("/SendMessage")
