@@ -48,6 +48,7 @@ public class ChatController {
         // Enviar mensagem ao destinatário
         String toUserDestination = "/queue/messages/" + message.getToId();
         template.convertAndSend(toUserDestination, message);
+        System.out.println(message);
     }
     
 
