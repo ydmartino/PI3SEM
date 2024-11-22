@@ -1,7 +1,8 @@
-
+import SockJS from 'sockjs-client/dist/sockjs';
 import { Client } from '@stomp/stompjs';
 
 let stompClient = null;
+let global = window
 
 export const connectWebSocket = (onMessageReceived) => {
     const socket = new SockJS('http://localhost:8080/ws');
