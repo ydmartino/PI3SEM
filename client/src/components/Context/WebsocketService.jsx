@@ -1,38 +1,82 @@
-import SockJS from 'sockjs-client/dist/sockjs';
+import React, { useEffect, useState, useRef } from 'react';
 import { Client } from '@stomp/stompjs';
 
-let stompClient = null;
-let global = window
+const StompComponent = () => {
+  const [messages, setMessages] = useState([]);
+  const [status, setStatus] = useState('Desconectado');
+  const stompClientRef = useRef(null); // useRef para persistir o cliente STOMP
 
-export const connectWebSocket = (onMessageReceived) => {
-    const socket = new SockJS('http://localhost:8080/ws');
-    stompClient = new Client({
-        webSocketFactory: () => socket,
-        reconnectDelay: 5000, // Tentar reconectar após 5 segundos
-        debug: (str) => console.log(str),
-        onConnect: () => {
-            console.log('WebSocket connected');
-            
-            // Subscribing to a specific user's queue (change to your user ID dynamically)
-            stompClient.subscribe('/queue/messages/2', (message) => {
-                onMessageReceived(JSON.parse(message.body));
-            });
-        },
-        onStompError: (error) => {
-            console.error('WebSocket error:', error);
-        },
+  useEffect(() => {
+    // Configuração do cliente STOMP
+    const stompClient = new Client({
+      brokerURL: 'http://localhost:8080/ws', // URL do servidor STOMP
+      reconnectDelay: 5000, // Tentativa de reconexão em 5 segundos
+      onConnect: () => {
+        console.log('STOMP conectado');
+        setStatus('Conectado');
+
+        // Inscrevendo-se em um tópico
+        stompClient.subscribe(`/queue/messages/${localStorage.getItem('toId')}`, (message) => {
+          console.log('Mensagem recebida:', message.body);
+          setMessages((prev) => [...prev, message.body]);
+        });
+      },
+      onStompError: (error) => {
+        console.error('Erro no STOMP:', error);
+        setStatus('Erro de conexão');
+      },
+      onDisconnect: () => {
+        console.log('STOMP desconectado');
+        setStatus('Desconectado');
+      },
     });
 
+    // Armazena o cliente no useRef
+    stompClientRef.current = stompClient;
+
+    // Ativa a conexão
     stompClient.activate();
+
+    // Cleanup
+    return () => {
+      console.log('Desconectando STOMP...');
+      stompClient.deactivate();
+    };
+  }, []);
+
+  // Função para enviar mensagens
+  const sendMessage = (msg) => {
+    const stompClient = stompClientRef.current; // Obtém o cliente do useRef
+    if (stompClient && stompClient.connected) {
+        const data = {
+            fromId: localStorage.getItem('userId'),
+            toId: localStorage.getItem('toId'),
+            message: msg
+        }
+      stompClient.publish(
+        '/app/SendMessage', // Endereço no servidor para enviar a mensagem
+        {},
+        JSON.stringify(data),
+      );
+      console.log('Mensagem enviada:', msg);
+    } else {
+      console.error('STOMP não está conectado.');
+    }
+  };
+
+  return (
+    <div>
+      <h1>STOMP com React</h1>
+      <p>Status: {status}</p>
+      <button onClick={() => sendMessage('Ola do cliente STOMP!')}>Enviar Mensagem</button>
+      <h2>Mensagens Recebidas:</h2>
+      <ul>
+        {messages.map((msg, index) => (
+          <li key={index}>{msg}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export const sendMessage = (message) => {
-    if (stompClient && stompClient.connected) {
-        stompClient.publish({
-            destination: '/app/SendMessage',
-            body: JSON.stringify(message),
-        });
-    } else {
-        console.error('WebSocket is not connected.');
-    }
-};
+export default StompComponent;

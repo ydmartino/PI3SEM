@@ -1,4 +1,3 @@
-import { connectWebSocket, sendMessage } from '../Context/WebsocketService'
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -29,7 +28,6 @@ export function MsgInput({ theme, nomeChat, fetchMsg }) {
       toId: nomeChat.id
     };
 
-    sendMessage(updatedFormData);
 
       setFormData({
         message: '',

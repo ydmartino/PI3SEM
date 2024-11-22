@@ -18,7 +18,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 				registry.addMapping("/**")
 				.allowedOrigins("http://localhost:5173")
-				.allowedMethods("*") // Métodos HTTP permitidos
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
 				.allowedHeaders("*") // Permite todos os cabeçalhos
 				.exposedHeaders("Authorization") // Expõe cabeçalhos necessários
 				.allowCredentials(true) // Permite cookies ou credenciais
