@@ -2,7 +2,6 @@ package com.quepassa.crm;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,7 +16,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 				registry.addMapping("/**")
 				.allowedOrigins("http://localhost:5173")
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
+				.allowedMethods("*") // Métodos HTTP permitidos
 				.allowedHeaders("*") // Permite todos os cabeçalhos
 				.exposedHeaders("Authorization") // Expõe cabeçalhos necessários
 				.allowCredentials(true) // Permite cookies ou credenciais

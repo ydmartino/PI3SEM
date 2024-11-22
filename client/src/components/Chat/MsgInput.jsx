@@ -1,3 +1,4 @@
+import { connectWebSocket, sendMessage } from '../Context/WebsocketService'
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -28,17 +29,13 @@ export function MsgInput({ theme, nomeChat, fetchMsg }) {
       toId: nomeChat.id
     };
 
-    try {
-      await axios.post('http://localhost:8080/MessageHistory', updatedFormData);
+    sendMessage(updatedFormData);
+
       setFormData({
         message: '',
         fromId: '',
         toId: ''
       });
-      fetchMsg()
-    } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-    }
   };
 
   return (

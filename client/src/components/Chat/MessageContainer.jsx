@@ -1,3 +1,4 @@
+import { connectWebSocket, sendMessage } from '../Context/WebsocketService'
 import React, { useEffect } from 'react'
 import { Message } from './Message'
 import axios from 'axios'
@@ -10,9 +11,11 @@ export function MessageContainer({ nomeChat, theme, setMessages, messages, fetch
     }
 
     useEffect(() => {
-        fetchMsg();
-        scrollBottom();
-      }, [ nomeChat ])
+        // Conectar ao WebSocket e ouvir mensagens
+            connectWebSocket((newMessage) => {
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+        });
+    }, []);
 
     return (
         <div className="messageContainer">
