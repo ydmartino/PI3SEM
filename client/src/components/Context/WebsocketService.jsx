@@ -16,7 +16,7 @@ const StompComponent = () => {
         setStatus('Conectado');
 
         // Inscrevendo-se em um tópico
-        stompClient.subscribe(`/queue/messages/${localStorage.getItem('toId')}`, (message) => {
+        stompClient.subscribe(`/queue/messages/${localStorage.getItem('userId')}`, (message) => {
           console.log('Mensagem recebida:', message.body);
           setMessages((prev) => [...prev, message.body]);
         });
@@ -53,12 +53,11 @@ const StompComponent = () => {
             toId: localStorage.getItem('toId'),
             message: msg
         }
-      stompClient.publish(
-        '/app/SendMessage', // Endereço no servidor para enviar a mensagem
-        {},
-        JSON.stringify(data),
-      );
-      console.log('Mensagem enviada:', msg);
+      stompClient.publish({
+        destination: `/app/SendMessage`, // Endereço no servidor para enviar a mensagem
+        body: JSON.stringify(data),
+    });
+      console.log('Mensagem enviada:', data);
     } else {
       console.error('STOMP não está conectado.');
     }
