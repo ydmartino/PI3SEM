@@ -1,5 +1,7 @@
 package com.quepassa.crm.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -36,9 +38,9 @@ public class ChatController {
     }
 
     // Valida o token e extrai o ID do usuário autenticado
-    String authenticatedUserId;
+    UUID authenticatedUserId;
     try {
-        authenticatedUserId = JwtUtil.extractUserId(token);
+        authenticatedUserId = UUID.fromString(JwtUtil.extractUserId(token));
     } catch (Exception e) {
         throw new IllegalArgumentException("Falha ao validar o token JWT: " + e.getMessage());
     }
