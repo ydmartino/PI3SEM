@@ -22,8 +22,11 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor{
 
         // Passar o Authentication para o WebSocket
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            System.out.println("Authentication encontrado no handshake: " + authentication.getName());
             attributes.put("authentication", authentication);
+        } else {
+            System.out.println("Usuário não autenticado no handshake.");
         }
         return true;
     }

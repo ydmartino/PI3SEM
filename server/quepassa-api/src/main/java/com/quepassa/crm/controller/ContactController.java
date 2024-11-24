@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quepassa.crm.JwtUtil;
 import com.quepassa.crm.model.Contacts;
 import com.quepassa.crm.service.ContactService;
 import com.quepassa.crm.service.CreateContactDTO;
 import com.quepassa.crm.service.LoginDTO;
-
 
 @RestController
 @RequestMapping("/Contacts")
@@ -44,9 +44,15 @@ public class ContactController {
     @PostMapping("/Login")
     public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO){
         String userId = contactService.validateLogin(loginDTO);
+
         if (userId != null){
-            LoginResponse response = new LoginResponse("login successful", userId);
-            return ResponseEntity.ok(response);
+             // Gerando o token JWT com o userId
+            String token = JwtUtil.generateToken(userId);
+            LoginResponse response = new LoginResponse("login successful", token);
+
+            return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .body(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
@@ -54,19 +60,19 @@ public class ContactController {
 
     public static class LoginResponse {
         private String message;
-        private String userId;
+        private String token;
     
-        public LoginResponse(String message, String userId) {
+        public LoginResponse(String message, String token) {
             this.message = message;
-            this.userId = userId;
+            this.token = token;
         }
     
         public String getMessage() {
             return message;
         }
     
-        public String getUserId() {
-            return userId;
+        public String getToken() {
+            return token;
         }
     }
 

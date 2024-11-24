@@ -7,10 +7,15 @@ const StompComponent = () => {
   const stompClientRef = useRef(null); // useRef para persistir o cliente STOMP
 
   useEffect(() => {
+    const token = localStorage.getItem('authToken'); // Adquire o valor de 'token' no localStorage
+
     // Configuração do cliente STOMP
     const stompClient = new Client({
       brokerURL: 'http://localhost:8080/ws', // URL do servidor STOMP
       reconnectDelay: 5000, // Tentativa de reconexão em 5 segundos
+      connectHeaders:{
+        Authorization:'Bearer ${token}'
+      },
       onConnect: () => {
         console.log('STOMP conectado');
         setStatus('Conectado');

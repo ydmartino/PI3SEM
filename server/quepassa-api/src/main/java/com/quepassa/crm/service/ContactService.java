@@ -39,6 +39,7 @@ public class ContactService {
     }
 
     public String getUserIdByUsername(String username) {
+        System.out.println(username);
         return contactsRepository.findByName(username)
             .map(contact -> String.valueOf(contact.getId())) // Obtém o ID do usuário
             .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + username));
