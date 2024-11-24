@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../assets/chat.css'
 import { MessageSection } from '../components/Chat/MessageSection'
 import ContactSection from '../components/Chat/ContactSection'
