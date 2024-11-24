@@ -3,20 +3,19 @@ import { Client } from '@stomp/stompjs';
 import axios from 'axios';
 
 export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
-
   const [status, setStatus] = useState('Desconectado');
   const stompClientRef = useRef(null); // useRef para persistir o cliente STOMP
 
   useEffect(() => {
+    console.log(localStorage.getItem('authToken'));
     const token = localStorage.getItem('authToken'); // Adquire o valor de 'token' no localStorage
+    console.log('Token JWT:', token); // Verifica o token
+
 
     // Configuração do cliente STOMP
     const stompClient = new Client({
-      brokerURL: 'http://localhost:8080/ws', // URL do servidor STOMP
+      brokerURL: `ws://localhost:8080/ws?token=${token}`, // URL do servidor STOMP
       reconnectDelay: 5000, // Tentativa de reconexão em 5 segundos
-      connectHeaders:{
-        Authorization:`Bearer ${token}`
-      },
       onConnect: () => {
         console.log('STOMP conectado');
         setStatus('Conectado');

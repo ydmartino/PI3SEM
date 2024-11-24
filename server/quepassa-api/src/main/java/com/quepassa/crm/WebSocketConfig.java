@@ -1,6 +1,7 @@
 package com.quepassa.crm;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
@@ -21,9 +22,13 @@ import org.springframework.security.messaging.context.SecurityContextChannelInte
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
-    @Autowired
-    private WebSocketHandshakeInterceptor handshakeInterceptor;
+    private final WebSocketHandler webSocketHandler;
+    private final WebSocketHandshakeInterceptor handshakeInterceptor;
 
+    public WebSocketConfig(WebSocketHandler webSocketHandler, WebSocketHandshakeInterceptor handshakeInterceptor) {
+        this.webSocketHandler = webSocketHandler;
+        this.handshakeInterceptor = handshakeInterceptor;
+    }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -35,7 +40,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
                 .setAllowedOrigins("http://localhost:5173")
-                .addInterceptors(handshakeInterceptor); // Endpoint WebSocket
+                .addInterceptors(new WebSocketHandshakeInterceptor()); // Endpoint WebSocket
     }
 
     @Override
@@ -64,6 +69,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     private ChannelInterceptor securityContextInterceptor() {
         return new SecurityContextChannelInterceptor();
     }
-
 
 }

@@ -21,7 +21,7 @@ public class SecurityConfig implements WebMvcConfigurer{
 				registry.addMapping("/**")
 				.allowedOrigins("http://localhost:5173")
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
-				.allowedHeaders("*") // Permite todos os cabeçalhos
+				.allowedHeaders("Authorization", "Content-Type") // Permite todos os cabeçalhos
 				.exposedHeaders("Authorization") // Expõe cabeçalhos necessários
 				.allowCredentials(true) // Permite cookies ou credenciais
 				.maxAge(3600); // Tempo de cache da configuração
@@ -36,7 +36,9 @@ public class SecurityConfig implements WebMvcConfigurer{
         http
             .csrf(csrf -> csrf.disable()) // Desativa CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll() // Permitir acesso a estas rotas
+				.requestMatchers("/**").permitAll() //Permite acesso ao endpoint WebSocket
+				.requestMatchers("/ws/**").permitAll() //Permite acesso ao endpoint WebSocket
+
                 .anyRequest().authenticated() // Exigir autenticação para outras rotas
             );
         return http.build();

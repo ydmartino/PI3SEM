@@ -44,8 +44,9 @@ public class ContactService {
             .map(contact -> String.valueOf(contact.getId())) // Obtém o ID do usuário
             .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + username));
     }
-
-
+    public Optional<Contacts> getUserById(UUID userId) {
+        return contactsRepository.findById(userId);  // Busca o usuário diretamente pelo ID (UUID).
+    }
 
     public String validateLogin(LoginDTO loginDTO){
         
