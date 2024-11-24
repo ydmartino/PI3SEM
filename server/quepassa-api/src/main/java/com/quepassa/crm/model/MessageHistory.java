@@ -19,12 +19,12 @@ public class MessageHistory {
    
     @Column(nullable = false)//Not Null
     private String message;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "date_time")
     @CreationTimestamp
     private Instant dateTime;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "from_id")
     private String fromId;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "to_id")
     private String toId;
     @Column
     private String messageImage;

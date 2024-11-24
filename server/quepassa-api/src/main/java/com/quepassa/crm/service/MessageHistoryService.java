@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.quepassa.crm.model.MessageHistory;
@@ -11,7 +13,6 @@ import com.quepassa.crm.repository.MessageHistoryRepository;
 
 @Service
 public class MessageHistoryService {
-
     
     private final MessageHistoryRepository messageHistoryRepository;
 
@@ -36,6 +37,10 @@ public class MessageHistoryService {
                         .toList();
 
     }
+
+    public List<MessageHistory> getRecentMessagesForUser(String userId) {
+        return messageHistoryRepository.findRecentMessagesForUser(userId);
+    }    
 
     public List<MessageHistory> getMessagesBetweenUsers(String userId1, String userId2) {
         // Busca mensagens enviadas de userId1 para userId2

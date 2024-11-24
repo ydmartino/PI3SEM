@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quepassa.crm.model.MessageHistory;
 import com.quepassa.crm.service.MessageHistoryService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -31,10 +33,11 @@ public class MessageHistoryController {
         
     }
 
-    @GetMapping("/User/{userId}")
-    public List<MessageHistory> getAllMessagesForUser(@PathVariable String userId){
-        return messageHistoryService.getAllMessagesForUser(userId);
+    @GetMapping("/User/{userId}/RecentMessages")
+    public List<MessageHistory> getRecentMessagesForUser(@PathVariable String userId) {
+        return messageHistoryService.getRecentMessagesForUser(userId);
     }
+        
     
     @GetMapping("/Conversation/{userId1}/{userId2}")
     public ResponseEntity<List<MessageHistory>> getMessagesBetweenUsers(
