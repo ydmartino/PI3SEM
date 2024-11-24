@@ -9,9 +9,8 @@ function ContactHeader({ handleFilter, activeTab, setActiveTab, leftBarStatus, t
 
   const { theme, toggleTheme } = useContext(ThemeContext)
 
-  const toggleTabs = () => {
-    if(activeTab === 'recents') setActiveTab('all')
-    if(activeTab === 'all') setActiveTab('recents')
+  const toggleTabs = (tab) => {
+    setActiveTab(tab)
   }
 
   return (

@@ -7,9 +7,7 @@ export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
   const stompClientRef = useRef(null); // useRef para persistir o cliente STOMP
 
   useEffect(() => {
-    console.log(localStorage.getItem('authToken'));
     const token = localStorage.getItem('authToken'); // Adquire o valor de 'token' no localStorage
-    console.log('Token JWT:', token); // Verifica o token
 
 
     // Configuração do cliente STOMP
@@ -22,8 +20,10 @@ export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
 
         // Inscrevendo-se em um tópico
         stompClient.subscribe(`/queue/messages/${localStorage.getItem('userId')}`, (receivedMsg) => {
-          console.log('Mensagem recebida:', receivedMsg.body);
-          setMessages((prev) => [...prev, receivedMsg.body]);
+          const parsedMsg = JSON.parse(receivedMsg.body)
+          if(localStorage.getItem('toId') == parsedMsg.fromId){
+            setMessages((prev) => [...prev, parsedMsg]);
+          }
         });
       },
       onStompError: (error) => {
@@ -63,7 +63,14 @@ export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
         headers: {Authorization:`Bearer ${localStorage.getItem('authToken')}`},
         body: JSON.stringify(data),
     });
-      console.log('Mensagem enviada:', data);
+      const hora = new Date();
+      const toSend = {
+        message: msg,
+        dateTime: hora.toISOString(),
+        fromId: localStorage.getItem('userId'),
+        toId: localStorage.getItem('toId'),
+      }
+      setMessages((prev) => [...prev, toSend]);
     } else {
       console.error('STOMP não está conectado.');
     }

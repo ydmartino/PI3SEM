@@ -17,6 +17,20 @@ function toggleLeftBar () {
     if(leftBarStatus == 'inactive') setLeftBarStatus('active')
 }
 
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            localStorage.removeItem('toId');
+        };
+
+        // Adiciona o evento
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        // Remove o evento ao desmontar o componente
+        return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
     return (
         <>
             <div className={`page ${theme}`}>
