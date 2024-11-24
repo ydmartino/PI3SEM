@@ -1,10 +1,11 @@
 package com.quepassa.crm.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quepassa.crm.model.MessageHistory;
@@ -28,12 +29,14 @@ public class ChatController {
     }
 
     @MessageMapping("/SendMessage")
-    public void sendMessage(MessageHistory message) {
+    public void sendMessage(MessageHistory message, SimpMessageHeaderAccessor headerAccessor, Principal principal) {
         // Obter o objeto de autenticação
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
+            if (principal == null) {
+                throw new IllegalArgumentException("Usuário não autenticado. Cabeçalhos recebidos: "+ headerAccessor.toString());
+        }    
+
         // Obter o nome de usuário autenticado
-        String authenticatedUsername = authentication.getName();
+        String authenticatedUsername = principal.getName();
     
         // Recuperar o ID do usuário a partir do serviço
         String authenticatedUserId = contactService.getUserIdByUsername(authenticatedUsername);
