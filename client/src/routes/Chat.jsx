@@ -4,7 +4,6 @@ import { MessageSection } from '../components/Chat/MessageSection'
 import ContactSection from '../components/Chat/ContactSection'
 import { useContext } from 'react'
 import { ThemeContext } from '../components/Context/ThemeContext'
-import StompComponent from '../components/Context/WebsocketService'
 
 function Chat() {
 
@@ -20,7 +19,6 @@ function toggleLeftBar () {
 
     return (
         <>
-            <StompComponent />
             <div className={`page ${theme}`}>
                 <div className="chatContainer">
                     <ContactSection leftBarStatus={leftBarStatus} toggleLeftBar={toggleLeftBar} setSearch={setSearch}
