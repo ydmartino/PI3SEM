@@ -20,7 +20,7 @@ export function MessageContainer({ nomeChat, theme, setMessages, messages, fetch
             {
               messages
               .map((message) => (
-                  <Message nomeChat={nomeChat} msg={message} theme={theme} />
+                  <Message key={message.id} nomeChat={nomeChat} msg={message} theme={theme} />
               ))
             }
             </ul>

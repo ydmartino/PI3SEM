@@ -21,7 +21,7 @@ export function MessageSection({ nomeChat, leftBarStatus }) {
     <div className={`messageSection ${theme} ${leftBarStatus == 'active' ? 'reduce' : ''}`}>
         <MsgHeader nomeChat={nomeChat} theme={theme} />
         <MsgContainer nomeChat={nomeChat} theme={theme} setMessages={setMessages} messages={messages} fetchMsg={fetchMsg} />
-        <MsgInput theme={theme} nomeChat={nomeChat} fetchMsg={fetchMsg} />
+        <MsgInput theme={theme} nomeChat={nomeChat} fetchMsg={fetchMsg} messages={messages} setMessages={setMessages} />
     </div>
   )
 }

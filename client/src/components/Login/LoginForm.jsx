@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import { jwtDecode } from 'jwt-decode'
 
 function LoginForm({ logging }) {
 
@@ -24,7 +25,12 @@ function LoginForm({ logging }) {
         const response = await axios.post(`http://localhost:8080/Contacts/Login`, formData)
         console.log(response)
         if(response.status == 200){
-            localStorage.setItem('userId', response.data.userId)
+            const token = response.data.token
+            localStorage.setItem('authToken', token)
+
+            const decoded = jwtDecode(token)
+            localStorage.setItem('userId', decoded.sub)
+            
             alert(response.data.message)
             return navigate('/chat')
         }
