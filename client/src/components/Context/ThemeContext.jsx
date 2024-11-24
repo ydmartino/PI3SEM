@@ -8,7 +8,6 @@ export const ThemeProvider = ({ children }) => {
     const toggleTheme = () => {
         setTheme(theme === "light" ? "dark" : "light")
         localStorage.setItem('preferredTheme', (theme == 'light' ? 'dark' : 'light'))
-        console.log(localStorage)
     }
 
     return <ThemeContext.Provider value={{ theme, toggleTheme }}>
