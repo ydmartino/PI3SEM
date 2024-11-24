@@ -1,7 +1,5 @@
 package com.quepassa.crm;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
@@ -47,9 +45,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
             public Message<?> preSend(Message<?> message, MessageChannel channel) {
                 SimpMessageHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, SimpMessageHeaderAccessor.class);
                 
-                if (accessor != null && accessor.getUser() == null) {
-                    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                    if (authentication != null && authentication.isAuthenticated()) {
+                if (accessor != null) {
+                    // Recupera a autenticação dos atributos do handshake
+                    Authentication authentication = (Authentication) accessor.getSessionAttributes().get("authentication");
+                    if (authentication != null) {
+                        // Popula o contexto de segurança do Spring
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
                         accessor.setUser(authentication);
                     }
                 }

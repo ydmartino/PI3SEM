@@ -29,14 +29,18 @@ public class JwtUtil {
 
     // Método para extrair o 'userId' do token
     public static String extractUserId(String token) {
-        JwtParser parser = Jwts.parser()  // Usando o parserBuilder() corretamente
+        try{
+        JwtParser parser = Jwts.parser()
                 .verifyWith(SECRET_KEY) // Define a chave secreta
                 .build();  // Cria o JwtParser
 
         Jws<Claims> jws = parser.parseSignedClaims(token);  // Parseia o JWT
         Claims claims = jws.getPayload(); // Obtém o corpo das claims
 
-        return claims.getSubject(); // Usando o método getSubject para acessar o 'userId'
+        return claims.getSubject(); // Usa o método getSubject para acessar o 'userId'
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Token JWT inválido: " + e.getMessage());
+        }
     }
 
     // Método para validar o token
