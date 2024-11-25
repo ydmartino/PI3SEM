@@ -5,17 +5,19 @@ import java.util.UUID;
 
 public class MessageWithSenderDTO {
 
-    private int messageId;
+    private int Id;
     private String message;
     private String fromName;
+    private String toName;
     private Instant dateTime;
     private UUID fromId;
     private UUID toId;
 
-    public MessageWithSenderDTO(int messageId, String message, String fromName, Instant dateTime, UUID fromId, UUID toId) {
-        this.messageId = messageId;
+    public MessageWithSenderDTO(int Id, String message, String fromName, String toName, Instant dateTime, UUID fromId, UUID toId) {
+        this.Id = Id;
         this.message = message;
         this.fromName = fromName;
+        this.toName = toName;
         this.dateTime = dateTime;
         this.fromId = fromId;
         this.toId = toId;
@@ -23,8 +25,16 @@ public class MessageWithSenderDTO {
 
     // Getters and setters
 
-    public int getMessageId() {
-        return messageId;
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
+    }
+
+    public int getId() {
+        return Id;
     }
 
     public UUID getFromId() {
@@ -43,8 +53,8 @@ public class MessageWithSenderDTO {
         this.toId = toId;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getMessage() {
