@@ -25,6 +25,7 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
 
       useEffect(() => {    
         const timer = setTimeout(() => {
+          console.log(`Subscribing to messages for Recents`);
           const stompClient = StompService.getClient();
     
           // Verifica se o cliente está conectado
@@ -33,13 +34,14 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
             return;
           }
       
-          userId = localStorage.getItem('userId');
+          const userId = localStorage.getItem('userId');
           // Inscreve-se no tópico de mensagens
           const subscription = stompClient.subscribe(
             `/queue/recent-messages/${userId}`,
             (receivedMsg) => {
-              const parsedRecents = JSON.parse(receivedMsg.body);
+              const parsedRecents = JSON.parse(receivedMsg.body)[0];
               console.log("Mensagem recebida:", parsedRecents);
+
               setRecents((prev) => [...prev, parsedRecents]);
             }
           );

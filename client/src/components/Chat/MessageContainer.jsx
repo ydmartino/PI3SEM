@@ -18,7 +18,7 @@ export function MessageContainer({ nomeChat, theme, setMessages, messages, fetch
   useEffect(() => {
     if (!nomeChat) return; // Não inscreve se o chat não está definido
 
-    console.log(`Subscribing to messages for chat: ${nomeChat}`);
+    console.log(`Subscribing to messages for MessageContainer`);
     const stompClient = StompService.getClient();
 
     // Verifica se o cliente está conectado
