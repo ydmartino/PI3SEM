@@ -2,14 +2,15 @@ package com.quepassa.crm.service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.quepassa.crm.model.MessageHistory;
 import com.quepassa.crm.repository.MessageHistoryRepository;
+import com.quepassa.crm.service.MessageWithSenderDTO;
 
 @Service
 public class MessageHistoryService {
@@ -27,7 +28,7 @@ public class MessageHistoryService {
     }
 
 
-    public List<MessageHistory> getAllMessagesForUser(String userId){
+    public List<MessageHistory> getAllMessagesForUser(UUID userId){
         //Mensagens enviadas e recebidas
         List<MessageHistory> sentMessages = messageHistoryRepository.findByFromId(userId);
         List<MessageHistory> receivedMessages = messageHistoryRepository.findByToId(userId);
@@ -38,11 +39,11 @@ public class MessageHistoryService {
 
     }
 
-    public List<MessageHistory> getRecentMessagesForUser(String userId) {
+    public List<MessageWithSenderDTO> getRecentMessagesForUser(UUID userId) {
         return messageHistoryRepository.findRecentMessagesForUser(userId);
-    }    
+    }
 
-    public List<MessageHistory> getMessagesBetweenUsers(String userId1, String userId2) {
+    public List<MessageHistory> getMessagesBetweenUsers(UUID userId1, UUID userId2) {
         // Busca mensagens enviadas de userId1 para userId2
         List<MessageHistory> sentMessages = messageHistoryRepository.findByFromIdAndToId(userId1, userId2);
         // Busca mensagens recebidas por userId1 de userId2

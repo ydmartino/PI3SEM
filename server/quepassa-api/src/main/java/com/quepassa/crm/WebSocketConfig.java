@@ -1,7 +1,5 @@
 package com.quepassa.crm;
 
-import java.util.List;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;

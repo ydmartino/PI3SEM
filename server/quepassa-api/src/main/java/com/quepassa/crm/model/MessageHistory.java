@@ -1,6 +1,7 @@
 package com.quepassa.crm.model;
 
 import java.time.Instant;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,9 +24,9 @@ public class MessageHistory {
     @CreationTimestamp
     private Instant dateTime;
     @Column(nullable = false, name = "from_id")
-    private String fromId;
+    private UUID fromId;
     @Column(nullable = false, name = "to_id")
-    private String toId;
+    private UUID toId;
     @Column
     private String messageImage;
 
@@ -54,19 +55,19 @@ public class MessageHistory {
         this.dateTime = Instant.now();
     }
 
-    public String getFromId() {
+    public UUID getFromId() {
         return this.fromId;
     }
 
-    public void setFromId(String fromId) {
+    public void setFromId(UUID fromId) {
         this.fromId = fromId;
     }
 
-    public String getToId() {
+    public UUID getToId() {
         return this.toId;
     }
 
-    public void setToId(String toId) {
+    public void setToId(UUID toId) {
         this.toId = toId;
     }
 
@@ -120,6 +121,14 @@ public class MessageHistory {
         } else if (!messageImage.equals(other.messageImage))
             return false;
         return true;
+    }
+
+    public String getMessageImage() {
+        return messageImage;
+    }
+
+    public void setMessageImage(String messageImage) {
+        this.messageImage = messageImage;
     }
 
 
