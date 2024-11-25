@@ -22,7 +22,7 @@ public interface MessageHistoryRepository extends JpaRepository<MessageHistory, 
 
     @Query("""
     SELECT new com.quepassa.crm.service.MessageWithSenderDTO(
-        m.id, m.message, c.name, m.dateTime
+        m.id, m.message, c.name, m.dateTime, m.fromId, m.toId
     )
     FROM MessageHistory m
     JOIN Contacts c ON c.id = m.fromId
