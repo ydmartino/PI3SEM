@@ -23,7 +23,6 @@ function LoginForm({ logging }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const response = await axios.post(`http://localhost:8080/Contacts/Login`, formData)
-        console.log(response)
         if(response.status == 200){
             const token = response.data.token
             localStorage.setItem('authToken', token)

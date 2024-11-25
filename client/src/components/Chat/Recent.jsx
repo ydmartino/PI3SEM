@@ -11,7 +11,8 @@ function Recent({ contact, setNomeChat, nomeChat, toggleLeftBar, theme }) {
             name: contact.fromId !== user ? contact.fromName : contact.toName
         }
         setNomeChat(recentConv);
-        localStorage.setItem('toId', contact.id)
+        localStorage.setItem('toId', recentConv.id)
+        console.log(localStorage.getItem('toId'))
         toggleLeftBar();
     };
 

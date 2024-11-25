@@ -38,13 +38,14 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
             `/queue/recent-messages`,
             (receivedMsg) => {
               const parsedRecents = JSON.parse(receivedMsg.body);
-              console.log(parsedRecents)
+              console.log(receivedMsg)
               //setMessages((prev) => [...prev, parsedRecents]);
             }
           );
       
           return () => {
             subscription.unsubscribe();
+            console.log('Desfeito')
           };
         }, 1000)
 

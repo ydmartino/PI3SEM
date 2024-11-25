@@ -5,6 +5,7 @@ function Contact({ contact, setNomeChat, nomeChat, toggleLeftBar, theme }) {
     const handleOpenChat = () => {
         setNomeChat(contact);
         localStorage.setItem('toId', contact.id)
+        console.log(localStorage.getItem('toId'))
         toggleLeftBar();
     };
 
