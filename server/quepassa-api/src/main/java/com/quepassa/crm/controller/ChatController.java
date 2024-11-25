@@ -62,11 +62,13 @@ public class ChatController {
 
         // Atualizar lista de mensagens recentes para ambos os usuários
         List<MessageWithSenderDTO> fromUserRecentMessages = messageHistoryService.getRecentMessagesForUser(message.getFromId());
-        template.convertAndSendToUser(message.getFromId().toString(), "/queue/recent-messages", fromUserRecentMessages);
-    
+        String destinationFrom = "/queue/recent-messages/"+ message.getFromId();
+        template.convertAndSend(destinationFrom, fromUserRecentMessages);
+
         List<MessageWithSenderDTO> toUserRecentMessages = messageHistoryService.getRecentMessagesForUser(message.getToId());
-        template.convertAndSendToUser(message.getToId().toString(), "/queue/recent-messages", toUserRecentMessages);
-    
+        String destinationTo = "/queue/recent-messages/"+ message.getToId();
+        template.convertAndSend(destinationTo, toUserRecentMessages);
+
         System.out.println("Mensagem enviada: " + message);
     
     }

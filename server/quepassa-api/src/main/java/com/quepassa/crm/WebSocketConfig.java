@@ -30,8 +30,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/queue"); // Prefixo para destinos do cliente
+        config.enableSimpleBroker("/queue", "/user"); // Prefixos para destinos do cliente
         config.setApplicationDestinationPrefixes("/app"); // Para mensagens enviadas ao servidor
+        config.setUserDestinationPrefix("/user"); // Define "/user" como prefixo para destinos específicos de usuários
+
     }
 
     @Override

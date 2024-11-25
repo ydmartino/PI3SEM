@@ -33,13 +33,14 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
             return;
           }
       
+          userId = localStorage.getItem('userId');
           // Inscreve-se no tópico de mensagens
           const subscription = stompClient.subscribe(
-            `/queue/recent-messages`,
+            `/queue/recent-messages/${userId}`,
             (receivedMsg) => {
               const parsedRecents = JSON.parse(receivedMsg.body);
-              console.log(receivedMsg)
-              //setMessages((prev) => [...prev, parsedRecents]);
+              console.log("Mensagem recebida:", parsedRecents);
+              setRecents((prev) => [...prev, parsedRecents]);
             }
           );
       
