@@ -1,104 +1,49 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Client } from '@stomp/stompjs';
-import axios from 'axios';
+import React, { useState } from 'react';
+import StompService from '../Context/StompService'
 
-export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
-  const [status, setStatus] = useState('Desconectado');
-  const stompClientRef = useRef(null); // useRef para persistir o cliente STOMP
-
-  useEffect(() => {
-    const token = localStorage.getItem('authToken'); // Adquire o valor de 'token' no localStorage
-
-
-    // Configuração do cliente STOMP
-    const stompClient = new Client({
-      brokerURL: `ws://localhost:8080/ws?token=${token}`, // URL do servidor STOMP
-      reconnectDelay: 5000, // Tentativa de reconexão em 5 segundos
-      onConnect: () => {
-        console.log('STOMP conectado');
-        setStatus('Conectado');
-
-        // Inscrevendo-se em um tópico
-        stompClient.subscribe(`/queue/messages/${localStorage.getItem('userId')}`, (receivedMsg) => {
-          const parsedMsg = JSON.parse(receivedMsg.body)
-          if(localStorage.getItem('toId') == parsedMsg.fromId){
-            setMessages((prev) => [...prev, parsedMsg]);
-          }
-        });
-      },
-      onStompError: (error) => {
-        console.error('Erro no STOMP:', error);
-        setStatus('Erro de conexão');
-      },
-      onDisconnect: () => {
-        console.log('STOMP desconectado');
-        setStatus('Desconectado');
-      },
-    });
-
-    // Armazena o cliente no useRef
-    stompClientRef.current = stompClient;
-
-    // Ativa a conexão
-    stompClient.activate();
-
-    // Cleanup
-    return () => {
-      console.log('Desconectando STOMP...');
-      stompClient.deactivate();
-    };
-  }, []);
+export function MsgInput({ theme, setMessages }) {
+  const [formData, setFormData] = useState({ message: '' });
 
   // Função para enviar mensagens
   const sendMessage = (msg) => {
-    const stompClient = stompClientRef.current; // Obtém o cliente do useRef
+    const stompClient = StompService.getClient(); // Obtém o cliente do singleton
     if (stompClient && stompClient.connected) {
-        const data = {
-            fromId: localStorage.getItem('userId'),
-            toId: localStorage.getItem('toId'),
-            message: msg
-        }
+      const data = {
+        fromId: localStorage.getItem('userId'),
+        toId: localStorage.getItem('toId'),
+        message: msg,
+      };
+
       stompClient.publish({
         destination: `/app/SendMessage`,
-        headers: {Authorization:`Bearer ${localStorage.getItem('authToken')}`},
+        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
         body: JSON.stringify(data),
-    });
+      });
+
       const hora = new Date();
       const toSend = {
         message: msg,
         dateTime: hora.toISOString(),
         fromId: localStorage.getItem('userId'),
         toId: localStorage.getItem('toId'),
-      }
+      };
       setMessages((prev) => [...prev, toSend]);
     } else {
       console.error('STOMP não está conectado.');
     }
   };
-  
-  const [formData, setFormData] = useState({
-    message: ''
-  });
-
-  const handleDate = () => {
-    return new Date().toLocaleString('pt-BR');
-  };
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    sendMessage(formData.message)
-
-    setFormData({
-      message: ''
-    });
+    sendMessage(formData.message);
+    setFormData({ message: '' });
   };
 
   return (
@@ -110,7 +55,6 @@ export function MsgInput({ theme, nomeChat, fetchMsg, messages, setMessages }) {
         placeholder="Sua mensagem (Max: 255 carácteres)"
         value={formData.message}
         onChange={handleChange}
-        autoComplete='none'
         maxLength={255}
       />
       <p className={`counter ${theme}`}>{formData.message.length}</p>
