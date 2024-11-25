@@ -21,14 +21,6 @@ function Chat() {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem('toId')
-    if(user == null){
-      alert('Usuário não autenticado. Favor efetuar login')
-      return navigate('/')
-    }
-  }, []);
-
-  useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.removeItem('toId');
     };
