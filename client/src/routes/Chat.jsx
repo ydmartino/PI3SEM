@@ -4,18 +4,29 @@ import { MessageSection } from '../components/Chat/MessageSection';
 import ContactSection from '../components/Chat/ContactSection';
 import { useContext } from 'react';
 import { ThemeContext } from '../components/Context/ThemeContext';
-import StompService from '../components/Context/StompService'; // Importa o serviço STOMP
+import StompService from '../components/Context/StompService';
+import { useNavigate } from 'react-router-dom'
 
 function Chat() {
   const { theme } = useContext(ThemeContext);
   const [nomeChat, setNomeChat] = useState('');
   const [search, setSearch] = useState('');
   const [leftBarStatus, setLeftBarStatus] = useState('inactive');
-  const [messages, setMessages] = useState([]); // Estado para armazenar mensagens
+  const [messages, setMessages] = useState([]);
+  
+  const navigate = useNavigate()
 
   function toggleLeftBar() {
     setLeftBarStatus((prevStatus) => (prevStatus === 'active' ? 'inactive' : 'active'));
   }
+
+  useEffect(() => {
+    const user = localStorage.getItem('toId')
+    if(user == null){
+      alert('Usuário não autenticado. Favor efetuar login')
+      return navigate('/')
+    }
+  }, []);
 
   useEffect(() => {
     const handleBeforeUnload = () => {

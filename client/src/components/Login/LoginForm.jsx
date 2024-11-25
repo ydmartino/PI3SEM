@@ -57,10 +57,11 @@ function LoginForm({ logging }) {
                             onChange={handleChange}
                             required/>
 
-                        <div className="rememberMe">
+                        {/*<div className="rememberMe">
                             <label className='rememberMeTxt'>Lembrar-me:</label>
                             <input type="checkbox" className='checkBtn' />
-                        </div>
+                        </div>*/}
+
                         <button type='submit' className='loginBtn'>Entrar</button>
                     </form>
                 </div>

@@ -40,7 +40,6 @@ export function MessageContainer({ nomeChat, theme, setMessages, messages, fetch
 
     // Cleanup ao desmontar ou quando o nome do chat mudar
     return () => {
-      console.log('Unsubscribing from messages...');
       subscription.unsubscribe();
     };
   }, [nomeChat, setMessages]);

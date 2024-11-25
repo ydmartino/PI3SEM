@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Recent from './Recent'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import StompService from '../Context/StompService'
 
 export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, toggleLeftBar }) {
 
@@ -21,6 +22,34 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
       useEffect(() => {
         getRecents();
       }, [])
+
+      useEffect(() => {    
+        const timer = setTimeout(() => {
+          const stompClient = StompService.getClient();
+    
+          // Verifica se o cliente está conectado
+          if (!stompClient || !stompClient.connected) {
+            console.error('STOMP não está conectado.');
+            return;
+          }
+      
+          // Inscreve-se no tópico de mensagens
+          const subscription = stompClient.subscribe(
+            `/queue/recent-messages`,
+            (receivedMsg) => {
+              const parsedRecents = JSON.parse(receivedMsg.body);
+              console.log(parsedRecents)
+              //setMessages((prev) => [...prev, parsedRecents]);
+            }
+          );
+      
+          return () => {
+            subscription.unsubscribe();
+          };
+        }, 1000)
+
+        return () => clearTimeout(timer)
+      }, []);
 
   return (
     <div className={`recentConv ${activeTab === 'recents' ? 'show' : ''} ${theme}`}>
