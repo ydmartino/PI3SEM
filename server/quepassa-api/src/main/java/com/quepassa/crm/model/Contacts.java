@@ -19,7 +19,8 @@ import lombok.Data;
 @Entity
 @Table(name="Contacts", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"id"}),
-    @UniqueConstraint(columnNames = {"email"})
+    @UniqueConstraint(columnNames = {"email"}),
+    @UniqueConstraint(columnNames = {"name"})
 })
 public class Contacts{
 
@@ -187,6 +188,7 @@ public class Contacts{
             return false;
         return true;
     }
+
 
     public String getUsername() {
         return name;

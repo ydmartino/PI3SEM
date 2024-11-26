@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import { jwtDecode } from 'jwt-decode'
 
 function LoginForm({ logging }) {
 
@@ -11,10 +12,8 @@ function LoginForm({ logging }) {
     const navigate = useNavigate()
 
     const [ formData, setFormData ] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confPassword: ''
+        name: '',
+        password: ''
     })
 
     const handleChange = (e) => {
@@ -23,24 +22,45 @@ function LoginForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //await axios.post('http://localhost:8080/Login', formData)
-        return navigate('/chat')
+        const response = await axios.post(`http://localhost:8080/Contacts/Login`, formData)
+        if(response.status == 200){
+            const token = response.data.token
+            localStorage.setItem('authToken', token)
+
+            const decoded = jwtDecode(token)
+            localStorage.setItem('userId', decoded.sub)
+            
+            alert(response.data.message)
+            return navigate('/chat')
+        }
+        else {
+            alert(response.data.message)
+        }
     }
 
     return (
         <div className='formContainer' style={{display: !logging ? 'none' : ''}}>
                     <form className={`loginForm ${theme}`} onSubmit={handleSubmit}>
                         
-                        <label htmlFor="username">Usuário:</label>
-                            <input type="text" name="username" required/>
+                        <label htmlFor="name">Usuário:</label>
+                            <input type="text" 
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required/>
 
                         <label htmlFor="password">Senha:</label>
-                            <input type="password" name="password" required/>
+                            <input type="password" 
+                            name="password" 
+                            value={formData.password}
+                            onChange={handleChange}
+                            required/>
 
-                        <div className="rememberMe">
+                        {/*<div className="rememberMe">
                             <label className='rememberMeTxt'>Lembrar-me:</label>
                             <input type="checkbox" className='checkBtn' />
-                        </div>
+                        </div>*/}
+
                         <button type='submit' className='loginBtn'>Entrar</button>
                     </form>
                 </div>

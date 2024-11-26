@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../assets/login.css'
 import SignUpForm from '../components/Login/SignUpForm'
 import LoginForm from '../components/Login/LoginForm'
@@ -7,6 +7,12 @@ import { useContext } from 'react'
 import { ThemeContext } from '../components/Context/ThemeContext'
 
 function Login() {
+
+    useEffect(() => {
+        localStorage.removeItem('toId');
+        localStorage.removeItem('userId');
+    }, []);
+
     const { theme, toggleTheme } = useContext(ThemeContext)
     const [ logging, setLogging ] = useState(true)
 

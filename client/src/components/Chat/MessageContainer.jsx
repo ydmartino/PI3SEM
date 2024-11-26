@@ -1,62 +1,57 @@
-import React, { useEffect } from 'react'
-import { Message } from './Message'
+import React, { useEffect, useRef } from 'react';
+import { Message } from './Message';
+import StompService from '../Context/StompService'; // Importa o serviço STOMP
 
-export function MessageContainer({ nomeChat, theme }) {
+export function MessageContainer({ nomeChat, theme, setMessages, messages, fetchMsg }) {
+  const bottomRef = useRef(null);
 
-    useEffect(() => {
-        const doc = document.getElementsByClassName('messageList')[0]
-        doc.scrollTo(0, doc.scrollHeight)
-      }, [ nomeChat ])
+  useEffect(() => {
+    // Busca mensagens ao mudar de chat
+    fetchMsg();
+  }, [nomeChat]);
 
-    const messages = [
-        {
-          de: "Diego",
-          para: "Victor",
-          msg: "To fazendo aquele cursinho da Asimov",
-          timestamp: '2024-11-14T09:17:12'
-        },
-        {
-          de: "Diego",
-          para: "Victor",
-          msg: "Tb",
-          timestamp: '2024-11-14T09:17:00'
-        },
-        {
-          de: "Victor",
-          para: "Diego",
-          msg: "Tranquilo, e tu?",
-          timestamp: '2024-11-14T09:16:32'
-        },
-        {
-          de: "Diego",
-          para: "Victor",
-          msg: "Como q ta?",
-          timestamp: '2024-11-14T09:15:55'
-        },
-        {
-          de: "Victor",
-          para: "Diego",
-          msg: "Salveeeeeee",
-          timestamp: '2024-11-14T08:45:32'
-        },
-        {
-          de: "Diego",
-          para: "Victor",
-          msg: "Eae",
-          timestamp: '2024-11-14T08:30:17'
-        },
-      ]
+  useEffect(() => {
+    // Sempre rola para o final quando as mensagens mudam
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-    return (
-        <div className="messageContainer">
-            <ul className='messageList'>
-            {
-              messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp))
-              .map((message) => (
-                  <Message nomeChat={nomeChat} de={message.de} msg={message.msg} time={message.timestamp} theme={theme} />
-              ))
-            }
-            </ul>
-        </div>
-    )
+  useEffect(() => {
+    if (!nomeChat) return; // Não inscreve se o chat não está definido
+
+    console.log(`Subscribing to messages for MessageContainer`);
+    const stompClient = StompService.getClient();
+
+    // Verifica se o cliente está conectado
+    if (!stompClient || !stompClient.connected) {
+      console.error('STOMP não está conectado.');
+      return;
+    }
+
+    // Inscreve-se no tópico de mensagens
+    const subscription = stompClient.subscribe(
+      `/queue/messages/${localStorage.getItem('userId')}`,
+      (receivedMsg) => {
+        const parsedMsg = JSON.parse(receivedMsg.body);
+        if (parsedMsg.fromId === localStorage.getItem('toId')) {
+          setMessages((prev) => [...prev, parsedMsg]);
+        }
+      }
+    );
+
+    // Cleanup ao desmontar ou quando o nome do chat mudar
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [nomeChat, setMessages]);
+
+  return (
+    <div className="messageContainer" style={{ overflowY: 'auto', maxHeight: '100vh' }}>
+      <ul className="messageList">
+        {messages.map((message) => (
+          <Message key={message.id} nomeChat={nomeChat} msg={message} theme={theme} />
+        ))}
+        <li ref={bottomRef} style={{ visibility: 'hidden' }}>.</li>
+      </ul>
+    </div>
+  );
 }

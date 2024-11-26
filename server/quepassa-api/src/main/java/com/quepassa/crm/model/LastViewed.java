@@ -1,6 +1,9 @@
 package com.quepassa.crm.model;
 
 import java.io.Serializable;
+import java.time.Instant;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,35 +16,36 @@ public class LastViewed implements Serializable{
     
     @Id //Primary Key
     @Column(nullable = false) //Not Null
-    private int fromIdUser;
+    private String fromIdUser;
     @Id //The other Primary Key
     @Column(nullable = false)
-    private int toIdUser;
+    private String toIdUser;
     @Column(nullable = false)
-    private String dateTime;
+    @UpdateTimestamp
+    private Instant dateTime;
 
-    public int getFromIdUser() {
+    public String getFromIdUser() {
         return this.fromIdUser;
     }
 
-    public void setFromIdUser(int fromIdUser) {
+    public void setFromIdUser(String fromIdUser) {
         this.fromIdUser = fromIdUser;
     }
 
-    public int getToIdUser() {
+    public String getToIdUser() {
         return this.toIdUser;
     }
 
-    public void setToIdUser(int toIdUser) {
+    public void setToIdUser(String toIdUser) {
         this.toIdUser = toIdUser;
     }
 
-    public String getDateTime() {
+    public Instant getDateTime() {
         return this.dateTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(Instant dateTime) {
+        this.dateTime = Instant.now();
     }
 
     //Hashcode and Equals
@@ -50,8 +54,9 @@ public class LastViewed implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + fromIdUser;
-        result = prime * result + toIdUser;
+        result = prime * result + ((fromIdUser == null) ? 0 : fromIdUser.hashCode());
+        result = prime * result + ((toIdUser == null) ? 0 : toIdUser.hashCode());
+        result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
         return result;
     }
     
@@ -64,9 +69,20 @@ public class LastViewed implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         LastViewed other = (LastViewed) obj;
-        if (fromIdUser != other.fromIdUser)
+        if (fromIdUser == null) {
+            if (other.fromIdUser != null)
+                return false;
+        } else if (!fromIdUser.equals(other.fromIdUser))
             return false;
-        if (toIdUser != other.toIdUser)
+        if (toIdUser == null) {
+            if (other.toIdUser != null)
+                return false;
+        } else if (!toIdUser.equals(other.toIdUser))
+            return false;
+        if (dateTime == null) {
+            if (other.dateTime != null)
+                return false;
+        } else if (!dateTime.equals(other.dateTime))
             return false;
         return true;
     }

@@ -1,55 +1,66 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Recent from './Recent'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import StompService from '../Context/StompService'
 
-export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab }) {
+export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, toggleLeftBar }) {
 
     const { theme, toggleTheme } = useContext(ThemeContext)
+    const [ recents, setRecents ] = useState([])
 
-    const recents = [{
-        'nome' : 'Marcelo',
-        'mensagem' : 'Bom dia',
-        'hora' : '09:52',
-    },
-    {
-        'nome' : 'Diego',
-        'mensagem' : 'Boa tarde',
-        'hora' : '14:30'
-    },
-    {
-        'nome' : 'Samuel',
-        'mensagem' : 'Boa noite',
-        'hora' : '20:22'
-    },
-    {
-        'nome' : 'Renan',
-        'mensagem' : 'Lmao',
-        'hora' : '00:52'
-    },
-    {
-        'nome' : 'Yuri',
-        'mensagem' : 'Lranja',
-        'hora' : '00:53'
-    },
-    {
-        'nome' : 'Victor',
-        'mensagem' : 'Falando nisso...',
-        'hora' : '17:01'
-    },
-    {
-        'nome' : 'Vinicius',
-        'mensagem' : 'Olá',
-        'hora' : '00:00'
-    }
-]
+    async function getRecents () {
+        const fetchRecents = await axios.get(`http://localhost:8080/MessageHistory/User/${localStorage.getItem('userId')}/RecentMessages`)
+        
+        if(fetchRecents.data != recents){
+            const sortedRecents = fetchRecents.data.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))
+            setRecents(sortedRecents)
+        }
+      }
+    
+      useEffect(() => {
+        getRecents();
+      }, [])
+
+      useEffect(() => {    
+        const timer = setTimeout(() => {
+          console.log(`Subscribing to messages for Recents`);
+          const stompClient = StompService.getClient();
+    
+          // Verifica se o cliente está conectado
+          if (!stompClient || !stompClient.connected) {
+            console.error('STOMP não está conectado.');
+            return;
+          }
+      
+          const userId = localStorage.getItem('userId');
+          // Inscreve-se no tópico de mensagens
+          const subscription = stompClient.subscribe(
+            `/queue/recent-messages/${userId}`,
+            (receivedMsg) => {
+              /*const parsedRecents = JSON.parse(receivedMsg.body)[0];
+              console.log("Mensagem recebida:", parsedRecents);
+              setRecents((prev) => [...prev, parsedRecents]);*/
+              getRecents()
+            }
+          );
+      
+          return () => {
+            subscription.unsubscribe();
+            console.log('Desfeito')
+          };
+        }, 1000)
+
+        return () => clearTimeout(timer)
+      }, []);
 
   return (
     <div className={`recentConv ${activeTab === 'recents' ? 'show' : ''} ${theme}`}>
         {recents
-        .filter((contact) => contact.nome.toLowerCase().includes(search.toLowerCase()))
+        //.filter((contact) => contact.name.toLowerCase().includes(search.toLowerCase()))
         .map((contact) => (
-            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} theme={theme} />
+            <Recent contact={contact} setNomeChat={setNomeChat} nomeChat={nomeChat} toggleLeftBar={toggleLeftBar} theme={theme} />
         ))}
     </div>
   )

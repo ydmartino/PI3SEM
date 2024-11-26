@@ -1,14 +1,13 @@
 package com.quepassa.crm.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class PKLastViewed implements Serializable {
 
-    private int fromIdUser;
-    private int toIdUser;
+    private String fromIdUser;
+    private String toIdUser;
 
-    public PKLastViewed(int fromIdUser, int toIdUser){
+    public PKLastViewed(String fromIdUser, String toIdUser){
         this.fromIdUser = fromIdUser;
         this.toIdUser = toIdUser;
     }
@@ -17,42 +16,51 @@ public class PKLastViewed implements Serializable {
 
     }
 
-    public int getfromIdUser() {
+    public String getfromIdUser() {
         return fromIdUser;
     }
 
-    public void setfromIdUser(int fromIdUser) {
+    public void setfromIdUser(String fromIdUser) {
         this.fromIdUser = fromIdUser;
     }
 
-    public int gettoIdUser() {
+    public String gettoIdUser() {
         return toIdUser;
     }
 
-    public void settoIdUser(int toIdUser) {
+    public void settoIdUser(String toIdUser) {
         this.toIdUser = toIdUser;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        PKLastViewed pk = (PKLastViewed) o;
-        return Objects.equals(toIdUser, pk.toIdUser) && Objects.equals(fromIdUser, pk.fromIdUser);
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + fromIdUser;
-        result = prime * result + toIdUser;
+        result = prime * result + ((fromIdUser == null) ? 0 : fromIdUser.hashCode());
+        result = prime * result + ((toIdUser == null) ? 0 : toIdUser.hashCode());
         return result;
     }
-   
 
-}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PKLastViewed other = (PKLastViewed) obj;
+        if (fromIdUser == null) {
+            if (other.fromIdUser != null)
+                return false;
+        } else if (!fromIdUser.equals(other.fromIdUser))
+            return false;
+        if (toIdUser == null) {
+            if (other.toIdUser != null)
+                return false;
+        } else if (!toIdUser.equals(other.toIdUser))
+            return false;
+        return true;
+    }
+
+    }
