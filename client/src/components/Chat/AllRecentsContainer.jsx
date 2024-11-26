@@ -39,10 +39,10 @@ export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, 
           const subscription = stompClient.subscribe(
             `/queue/recent-messages/${userId}`,
             (receivedMsg) => {
-              const parsedRecents = JSON.parse(receivedMsg.body)[0];
+              /*const parsedRecents = JSON.parse(receivedMsg.body)[0];
               console.log("Mensagem recebida:", parsedRecents);
-
-              setRecents((prev) => [...prev, parsedRecents]);
+              setRecents((prev) => [...prev, parsedRecents]);*/
+              getRecents()
             }
           );
       
