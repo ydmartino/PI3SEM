@@ -1,5 +1,5 @@
 body {
-    background-color: #A8E6CF;
+    background-color: #1E4355;
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
@@ -216,4 +216,54 @@ label {
 
 .modeBtn.dark {
     background-image: url('./sun.svg');
+}
+
+@media only screen and (max-width: 800px) {
+    *{
+        font-family: "Comic Sans MS", "Comic Sans";
+    }
+
+    .transpArea {
+        width: 60lvw;
+        height: 100lvh;
+        margin: 0px;
+        background-image: url('./bg_lightmode.jpg');
+        background-size: 150% 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #efefef;
+        transition: .3s ease;
+        display: flex;
+    }
+    
+    .dark.transpArea {
+        background-image: url('./bg_darkmode.jpg');
+        background-size: 150% 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #375B6D;
+    }
+    
+    .loginContainer {
+        width: 40lvw;
+        height: 100lvh;
+        margin: 0px;
+        background-color: #efefef;
+        color: #242424;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: .3s ease;
+    }
+
+    .loginBtn {
+        margin: 20px 5%;
+        width: 100px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        background-color: #289DD2;
+        transition: .4s;
+        cursor: pointer;
+    }
 }
