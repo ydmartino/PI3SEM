@@ -22,8 +22,20 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             String token = servletRequest.getServletRequest().getParameter("token");
+
             if (token != null && !token.isEmpty()) {
-                attributes.put("token", token);
+                try {
+                    String userId = JwtUtil.extractUserId(token);
+                    attributes.put("token", token);
+                    attributes.put("simpUser",userId);
+                    System.out.println("Token e userId adicionados aos atributos do handshake.");
+                } catch (Exception e) {
+                    System.out.println("Erro ao validar o token no Handshake: "+e.getMessage());
+                    return false;
+                }
+            } else {
+            System.err.println("Token ausente ou inválido na conexão WebSocket.");
+            return false; // Rejeita a conexão se o token estiver ausente
             }
         }
         return true;
