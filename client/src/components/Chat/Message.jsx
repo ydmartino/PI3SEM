@@ -6,10 +6,6 @@ export function Message({ nomeChat, msg, theme }) {
     const messageRef = useRef(null);
 
     useEffect(() => {
-        if(messageRef.current) {
-            messageRef.current.id = msg.id;
-        }
-
         /* const user = localStorage.getItem('userId')
         if(msg.viewed == false && user != msg.fromId){
             axios.post(`http://localhost:8080/Viewed/${msg.id}`)

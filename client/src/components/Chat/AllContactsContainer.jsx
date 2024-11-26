@@ -12,7 +12,8 @@ export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab,
 
   async function getContacts () {
     const fetchContacts = await axios.get('http://localhost:8080/Contacts/All')
-    setContacts(fetchContacts.data)
+    const sortedContacts = fetchContacts.data.sort((a, b) => a.name.localeCompare(b.name))
+    setContacts(sortedContacts)
   }
 
   useEffect(() => {
