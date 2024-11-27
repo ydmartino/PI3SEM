@@ -3,15 +3,17 @@ import Contact from './Contact'
 import axios from 'axios'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import { HttpContext } from '../Context/HttpContext'
 
 export function AllContactsContainer({ search, nomeChat, setNomeChat, activeTab, toggleLeftBar }) {
   
   const { theme, toggleTheme } = useContext(ThemeContext)
+  const { linkToWeb } = useContext(HttpContext)
 
   const [ contacts, setContacts ] = useState([])
 
   async function getContacts () {
-    const fetchContacts = await axios.get('http://localhost:8080/Contacts/All')
+    const fetchContacts = await axios.get(`${linkToWeb}/Contacts/All`)
     const sortedContacts = fetchContacts.data.sort((a, b) => a.name.localeCompare(b.name))
     setContacts(sortedContacts)
   }

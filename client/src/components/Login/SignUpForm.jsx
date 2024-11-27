@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
+import { HttpContext } from '../Context/HttpContext'
 
 function SignUpForm({ logging }) {
 
     const { theme, toggleTheme } = useContext(ThemeContext)
+    const { linkToWeb } = useContext(HttpContext)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,7 +23,7 @@ function SignUpForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:8080/Contacts', formData)
+        const response = await axios.post(`${linkToWeb}/Contacts`, formData)
         console.log(response)
         if(response.status == 201){
             alert(response.status + ": Criado com sucesso")
