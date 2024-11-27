@@ -6,14 +6,16 @@ import { MsgContainer } from './MsgContainer.jsx'
 import { MsgHeader } from './MsgHeader.jsx'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext.jsx'
+import { HttpContext } from '../Context/HttpContext.jsx'
 
 export function MessageSection({ nomeChat, leftBarStatus }) {
 
   const { theme, toggleTheme } = useContext(ThemeContext)
+  const { linkToWeb } = useContext(HttpContext)
   const [ messages, setMessages ] = useState([])
 
   const fetchMsg = async () => {
-    const fetchedMsg = await axios.get(`http://localhost:8080/MessageHistory/Conversation/${localStorage.getItem('userId')}/${nomeChat.id}`)
+    const fetchedMsg = await axios.get(`${linkToWeb}/MessageHistory/Conversation/${localStorage.getItem('userId')}/${nomeChat.id}`)
     setMessages(fetchedMsg.data)
   }
 

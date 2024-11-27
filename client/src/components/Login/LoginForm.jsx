@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
 import { jwtDecode } from 'jwt-decode'
+import { HttpContext } from '../Context/HttpContext'
 
 function LoginForm({ logging }) {
 
     const { theme, toggleTheme } = useContext(ThemeContext)
+    const { linkToWeb } = useContext(HttpContext)
     
     const navigate = useNavigate()
 
@@ -22,7 +24,7 @@ function LoginForm({ logging }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post(`http://localhost:8080/Contacts/Login`, formData)
+        const response = await axios.post(`${linkToWeb}/Contacts/Login`, formData)
         if(response.status == 200){
             const token = response.data.token
             localStorage.setItem('authToken', token)

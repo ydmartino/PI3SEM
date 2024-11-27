@@ -6,6 +6,7 @@ import App from './App.jsx'
 import Login from './routes/Login.jsx'
 import Chat from './routes/Chat.jsx'
 import { ThemeProvider } from './components/Context/ThemeContext.jsx'
+import { HttpProvider } from './components/Context/HttpContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,8 +27,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <HttpProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </HttpProvider>
   </StrictMode>,
 )

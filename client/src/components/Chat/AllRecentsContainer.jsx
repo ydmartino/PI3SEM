@@ -4,14 +4,16 @@ import Recent from './Recent'
 import { useContext } from 'react'
 import { ThemeContext } from '../Context/ThemeContext'
 import StompService from '../Context/StompService'
+import { HttpContext } from '../Context/HttpContext'
 
 export function AllRecentsContainer({ search, setNomeChat, nomeChat, activeTab, toggleLeftBar }) {
 
     const { theme, toggleTheme } = useContext(ThemeContext)
+    const { linkToWeb } = useContext(HttpContext)
     const [ recents, setRecents ] = useState([])
 
     async function getRecents () {
-        const fetchRecents = await axios.get(`http://localhost:8080/MessageHistory/User/${localStorage.getItem('userId')}/RecentMessages`)
+        const fetchRecents = await axios.get(`${linkToWeb}/MessageHistory/User/${localStorage.getItem('userId')}/RecentMessages`)
         
         if(fetchRecents.data != recents){
             const sortedRecents = fetchRecents.data.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))
